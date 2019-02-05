@@ -3,4 +3,4 @@ import { stackConfig, routeConfig } from "./navigator-config";
 
 const RootStack = createStackNavigator(routeConfig, stackConfig);
 
-export const AppContainer = createAppContainer(RootStack);
+export default createAppContainer(RootStack);

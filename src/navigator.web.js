@@ -4,4 +4,4 @@ import { stackConfig, routeConfig } from "./navigator-config";
 
 const RootStack = createSwitchNavigator(routeConfig, stackConfig);
 
-export const AppContainer = createBrowserApp(RootStack);
+export default createBrowserApp(RootStack);
