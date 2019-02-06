@@ -1,22 +1,17 @@
 import React from "react";
 import Navigator from "../navigator";
-// import { auth } from "../firebase";
-import { Provider, Subscribe } from "unstated";
-import AuthContainer from "../containers/AuthContainer";
-import AppWrapper from "../components/AppWrapper";
+import { auth } from "../firebase";
+import { view } from "react-easy-state";
+import authStore from "../stores/authStore";
 
-export default class App extends React.Component {
+class App extends React.Component {
+  componentDidMount() {
+    auth.onAuthStateChanged(authStore.onAuthChanged);
+  }
+
   render() {
-    return (
-      <Provider>
-        <Subscribe to={[AuthContainer]}>
-          {Auth => (
-            <AppWrapper Auth={Auth}>
-              <Navigator />
-            </AppWrapper>
-          )}
-        </Subscribe>
-      </Provider>
-    );
+    return <Navigator />;
   }
 }
+
+export default view(App);

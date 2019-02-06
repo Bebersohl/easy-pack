@@ -1,34 +1,29 @@
 import React from "react";
-import { View, Text, Button } from "react-native";
-import { Subscribe } from "unstated";
-import AuthContainer from "../containers/AuthContainer";
+import { Text, Button } from "react-native";
+import { view } from "react-easy-state";
+import authStore from "../stores/authStore";
+import Layout from "../components/Layout";
 
 class HomePage extends React.Component {
   static navigationOptions = {
     title: "Home"
   };
+
   render() {
+    console.log("authStore.firebaseUser", authStore.firebaseUser);
     return (
-      <Subscribe to={[AuthContainer]}>
-        {Auth => (
-          <View>
-            {Auth.state.firebaseUser ? (
-              <Text>Logged in</Text>
-            ) : (
-              <Text>Logged out</Text>
-            )}
-            <Text>HomePage</Text>
-            <Button
-              title="Go to About"
-              onPress={() => this.props.navigation.navigate("AboutPage")}
-            />
-            <Button title="Login" onPress={() => Auth.signIn("google")} />
-            <Button title="Logout" onPress={() => Auth.signOut()} />
-          </View>
-        )}
-      </Subscribe>
+      <Layout>
+        <Text>HomePage</Text>
+        <Button
+          title="Go to About"
+          onPress={() => this.props.navigation.navigate("AboutPage")}
+        />
+        <Text>{authStore.firebaseUser ? "logged in" : "logged out"}</Text>
+        <Button onPress={() => authStore.signIn("google")} title="Sign in" />
+        <Button onPress={() => authStore.signOut()} title="Sign out" />
+      </Layout>
     );
   }
 }
 
-export default HomePage;
+export default view(HomePage);
