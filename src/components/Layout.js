@@ -5,11 +5,10 @@ import { View } from "react-native";
 import { view } from "react-easy-state";
 
 const Layout = ({ children }) => {
-  console.log("loading", uiStore.loadingOverlayText);
   return (
     <View style={{ flex: 1 }}>
       {children}
-      {uiStore.loadingOverlayText && <LoadingOverlay />}
+      {!!uiStore.loadingOverlayText && <LoadingOverlay />}
     </View>
   );
 };

@@ -6,7 +6,9 @@ import authStore from "../stores/authStore";
 
 class App extends React.Component {
   componentDidMount() {
-    auth.onAuthStateChanged(authStore.onAuthChanged);
+    // move this to authStore
+    auth.getRedirectResult().then(authStore.handleGetRedirectResult);
+    auth.onAuthStateChanged(authStore.handleAuthStateChanged);
   }
 
   render() {

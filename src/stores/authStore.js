@@ -9,7 +9,7 @@ import uiStore from "../stores/uiStore";
 const authStore = store({
   firebaseUser: null,
 
-  signIn: async platform => {
+  signIn: platform => {
     try {
       uiStore.loadingOverlayText = "Signing in...";
       const provider =
@@ -17,11 +17,18 @@ const authStore = store({
           ? googleAuthProvider
           : facebookTwitterAuthProvider;
 
-      await auth.signInWithRedirect(provider);
+      auth.signInWithRedirect(provider);
+    } catch (err) {
+      uiStore.loadingOverlayText = "";
+      console.log("err", err);
+    }
+  },
 
-      const result = await auth.getRedirectResult();
-
-      authStore.firebaseUser = result.user;
+  signOut: async () => {
+    try {
+      uiStore.loadingOverlayText = "Signing out...";
+      authStore.firebaseUser = null;
+      await auth.signOut();
     } catch (err) {
       console.log("err", err);
     } finally {
@@ -29,14 +36,14 @@ const authStore = store({
     }
   },
 
-  signOut: async () => {
-    authStore.firebaseUser = null;
-    await auth.signOut();
-  },
-
-  onAuthChanged: firebaseUser => {
-    console.log("auth changed", firebaseUser);
+  handleAuthStateChanged: firebaseUser => {
+    console.log("handleAuthStateChanged", firebaseUser);
     authStore.firebaseUser = firebaseUser;
+  },
+  handleGetRedirectResult: result => {
+    console.log("handleGetRedirectResult", result);
+    authStore.firebaseUser = result.user;
+    uiStore.loadingOverlayText = "";
   }
 });
 

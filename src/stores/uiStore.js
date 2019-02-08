@@ -1,7 +1,7 @@
 import { store } from "react-easy-state";
 
 const uiStore = store({
-  loadingOverlayText: "Gotem"
+  loadingOverlayText: "Initializing..."
 });
 
 export default uiStore;
