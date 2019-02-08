@@ -1,18 +1,18 @@
-import React from "react";
-import { Text, Button } from "react-native";
-import { view } from "react-easy-state";
-import authStore from "../stores/authStore";
-import Layout from "../components/Layout";
+import React from "react"
+import { Text, Button } from "react-native"
+import { view } from "react-easy-state"
+import authStore from "../stores/authStore"
+import Layout from "../components/Layout"
 
 class HomePage extends React.Component {
   static navigationOptions = {
     title: "Home"
-  };
+  }
 
   render() {
-    console.log("authStore.firebaseUser", authStore.firebaseUser);
+    console.log("authStore.firebaseUser", authStore.firebaseUser)
     return (
-      <Layout>
+      <Layout navigationOptions={HomePage.navigationOptions}>
         <Text>HomePage</Text>
         <Button
           title="Go to About"
@@ -22,8 +22,8 @@ class HomePage extends React.Component {
         <Button onPress={() => authStore.signIn("google")} title="Sign in" />
         <Button onPress={() => authStore.signOut()} title="Sign out" />
       </Layout>
-    );
+    )
   }
 }
 
-export default view(HomePage);
+export default view(HomePage)

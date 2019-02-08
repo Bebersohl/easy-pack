@@ -11,13 +11,14 @@
     "web-build": "react-scripts build",
     "web-test": "react-scripts test",
     "web-eject": "react-scripts eject",
-    "prettier": "npx prettier --write \"**/*.js\""
+    "prettier": "npx prettier --no-semi --write \"**/*.js\""
   },
   "dependencies": {
     "@react-navigation/core": "^3.0.3",
     "@react-navigation/web": "^1.0.0-alpha.7",
     "expo": "^32.0.0",
     "firebase": "^5.8.2",
+    "lodash.get": "^4.4.2",
     "react": "16.5.0",
     "react-art": "^16.7.0",
     "react-dom": "^16.7.0",
@@ -52,7 +53,7 @@
   },
   "lint-staged": {
     "*.{js,json,css,md}": [
-      "prettier --write",
+      "prettier --no-semi --write",
       "git add"
     ]
   }
