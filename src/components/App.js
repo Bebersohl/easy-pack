@@ -3,7 +3,7 @@ import Navigator from "../navigator"
 import { auth } from "../firebase"
 import { view } from "react-easy-state"
 import authStore from "../stores/authStore"
-import navigatorService from "../navigatorService.native"
+import navigatorService from "../navigatorService"
 
 class App extends React.Component {
   componentDidMount() {

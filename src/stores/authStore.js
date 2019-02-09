@@ -1,7 +1,7 @@
 import { store } from "react-easy-state"
 import { auth } from "../firebase"
 import uiStore from "../stores/uiStore"
-import navigatorService from "../navigatorService.native"
+import navigatorService from "../navigatorService"
 
 const authStore = store({
   firebaseUser: null,
@@ -51,12 +51,13 @@ const authStore = store({
 
     authStore.firebaseUser = firebaseUser
 
+    uiStore.loadingOverlayText = ""
+
     if (firebaseUser) {
       navigatorService.navigate("HomePage")
     } else {
       navigatorService.navigate("SignInPage")
     }
-    uiStore.loadingOverlayText = ""
   }
 })
 

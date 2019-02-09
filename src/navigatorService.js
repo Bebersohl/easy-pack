@@ -1,6 +1,7 @@
 // NavigationService.js
 
-import { NavigationActions } from "react-navigation"
+import { NavigationActions } from "@react-navigation/core"
+import { Platform } from "react-native"
 
 let _navigator
 
@@ -9,7 +10,8 @@ function setTopLevelNavigator(navigatorRef) {
 }
 
 function navigate(routeName, params) {
-  _navigator.dispatch(
+  const dispatchFn = Platform.OS === "web" ? "_dispatch" : "dispatch"
+  _navigator[dispatchFn](
     NavigationActions.navigate({
       routeName,
       params
