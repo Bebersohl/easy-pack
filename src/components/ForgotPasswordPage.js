@@ -45,10 +45,6 @@ class ForgotPasswordPage extends React.Component {
           title="Send Password Reset"
           onPress={this.handlePasswordReset}
         />
-        <Button
-          title="Go to Sign In"
-          onPress={() => this.props.navigation.navigate("SignInPage")}
-        />
       </Layout>
     )
   }

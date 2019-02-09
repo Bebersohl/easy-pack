@@ -1,6 +1,25 @@
-import { createStackNavigator, createAppContainer } from "react-navigation";
-import { stackConfig, routeConfig } from "./navigator-config";
+import {
+  createStackNavigator,
+  createSwitchNavigator,
+  createAppContainer
+} from "react-navigation"
+import {
+  stackConfig,
+  routeConfigAuth,
+  routeConfigApp
+} from "./navigator-config"
 
-const RootStack = createStackNavigator(routeConfig, stackConfig);
+const AppStack = createStackNavigator(routeConfigApp)
+const AuthStack = createStackNavigator(routeConfigAuth)
 
-export default createAppContainer(RootStack);
+export default createAppContainer(
+  createSwitchNavigator(
+    {
+      App: AppStack,
+      Auth: AuthStack
+    },
+    {
+      // initialRouteName: 'AuthLoading',
+    }
+  )
+)

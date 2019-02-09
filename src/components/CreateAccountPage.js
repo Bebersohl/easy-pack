@@ -68,10 +68,6 @@ class CreateAccountPage extends React.Component {
           onChangeText={text => this.handleChangeText("displayName", text)}
         />
         <Button title="Create Account" onPress={this.handleCreateAccount} />
-        <Button
-          title="Go to Sign In"
-          onPress={() => this.props.navigation.navigate("SignInPage")}
-        />
       </Layout>
     )
   }

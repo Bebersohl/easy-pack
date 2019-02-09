@@ -54,7 +54,7 @@ class SignInPage extends React.Component {
         />
         <Button title="Sign In" onPress={this.handleSignIn} />
         <Button
-          title="Go to Create Account"
+          title="Create Account"
           onPress={() => this.props.navigation.navigate("CreateAccountPage")}
         />
         <Button

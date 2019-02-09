@@ -1,8 +1,23 @@
-import { createSwitchNavigator } from "@react-navigation/core";
-import { createBrowserApp } from "@react-navigation/web";
-import { stackConfig, routeConfig } from "./navigator-config";
-import { view } from "react-easy-state";
+import { createSwitchNavigator } from "@react-navigation/core"
+import { createBrowserApp } from "@react-navigation/web"
+import {
+  stackConfig,
+  routeConfigApp,
+  routeConfigAuth
+} from "./navigator-config"
+import { view } from "react-easy-state"
 
-const RootStack = createSwitchNavigator(routeConfig, stackConfig);
+const AppStack = createSwitchNavigator(routeConfigApp)
+const AuthStack = createSwitchNavigator(routeConfigAuth)
 
-export default view(createBrowserApp(RootStack));
+export default createBrowserApp(
+  createSwitchNavigator(
+    {
+      App: AppStack,
+      Auth: AuthStack
+    },
+    {
+      // initialRouteName: 'AuthLoading',
+    }
+  )
+)

@@ -3,10 +3,17 @@ import { Text, Button } from "react-native"
 import { view } from "react-easy-state"
 import authStore from "../stores/authStore"
 import Layout from "../components/Layout"
+import navigatorService from "../navigatorService"
 
 class HomePage extends React.Component {
   static navigationOptions = {
-    title: "Home"
+    title: "Home",
+    headerRight: (
+      <Button
+        onPress={() => navigatorService.navigate("ProfilePage")}
+        title="Profile"
+      />
+    )
   }
 
   render() {
@@ -14,17 +21,7 @@ class HomePage extends React.Component {
     return (
       <Layout navigationOptions={HomePage.navigationOptions}>
         <Text>HomePage</Text>
-        <Button
-          title="Go to About"
-          onPress={() => this.props.navigation.navigate("AboutPage")}
-        />
-        <Button
-          title="Go to Profile"
-          onPress={() => this.props.navigation.navigate("ProfilePage")}
-        />
         <Text>{authStore.firebaseUser ? "logged in" : "logged out"}</Text>
-        <Button onPress={() => authStore.signIn("google")} title="Sign in" />
-        <Button onPress={() => authStore.signOut()} title="Sign out" />
       </Layout>
     )
   }

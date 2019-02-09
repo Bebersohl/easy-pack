@@ -81,6 +81,8 @@ const authStore = store({
       uiStore.loadingOverlayText = "Signing in..."
 
       await auth.signInWithEmailAndPassword(email, password)
+
+      navigatorService.navigate("HomePage")
     } catch (err) {
       return err.message
     } finally {

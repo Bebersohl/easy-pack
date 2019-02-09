@@ -1,5 +1,4 @@
 import HomePage from "./components/HomePage"
-import AboutPage from "./components/AboutPage"
 import SignInPage from "./components/SignInPage"
 import CreateAccountPage from "./components/CreateAccountPage"
 import ForgotPasswordPage from "./components/ForgotPasswordPage"
@@ -7,17 +6,19 @@ import ProfilePage from "./components/ProfilePage"
 import DeleteAccountPage from "./components/DeleteAccountPage"
 import UpdateProfilePage from "./components/UpdateProfilePage"
 
-export const routeConfig = {
-  HomePage: { screen: HomePage },
+export const routeConfigAuth = {
   SignInPage: { screen: SignInPage, path: "sign-in" },
-  AboutPage: { screen: AboutPage, path: "about/:id" },
-  CreateAccountPage: { screen: CreateAccountPage, path: "create-account" },
   ForgotPasswordPage: { screen: ForgotPasswordPage, path: "forgot-password" },
+  CreateAccountPage: { screen: CreateAccountPage, path: "create-account" }
+}
+
+export const routeConfigApp = {
+  HomePage: { screen: HomePage },
   ProfilePage: { screen: ProfilePage, path: "profile" },
   UpdateProfilePage: { screen: UpdateProfilePage, path: "update-profile" },
-  DeleteAccountPage: { screen: DeleteAccountPage, path: "delete-profile" }
+  DeleteAccountPage: { screen: DeleteAccountPage, path: "delete-account" }
 }
 
 export const stackConfig = {
-  initialRouteName: "HomePage"
+  initialRouteName: "SignInPage"
 }
