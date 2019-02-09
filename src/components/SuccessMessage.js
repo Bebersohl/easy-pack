@@ -2,11 +2,11 @@ import React from "react"
 import { View, Text, StyleSheet } from "react-native"
 import { view } from "react-easy-state"
 
-class ErrorMessage extends React.Component {
+class SuccessMessage extends React.Component {
   render() {
     return (
       <View style={styles.loading}>
-        <Text style={{ color: "red" }}>{this.props.message}</Text>
+        <Text style={{ color: "green" }}>{this.props.message}</Text>
       </View>
     )
   }
@@ -14,4 +14,4 @@ class ErrorMessage extends React.Component {
 
 const styles = StyleSheet.create({})
 
-export default view(ErrorMessage)
+export default view(SuccessMessage)

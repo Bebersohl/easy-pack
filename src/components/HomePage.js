@@ -18,6 +18,10 @@ class HomePage extends React.Component {
           title="Go to About"
           onPress={() => this.props.navigation.navigate("AboutPage")}
         />
+        <Button
+          title="Go to Profile"
+          onPress={() => this.props.navigation.navigate("ProfilePage")}
+        />
         <Text>{authStore.firebaseUser ? "logged in" : "logged out"}</Text>
         <Button onPress={() => authStore.signIn("google")} title="Sign in" />
         <Button onPress={() => authStore.signOut()} title="Sign out" />

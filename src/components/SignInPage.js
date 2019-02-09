@@ -2,11 +2,11 @@ import React from "react"
 import { Button, StyleSheet, TextInput } from "react-native"
 import Layout from "./Layout"
 import authStore from "../stores/authStore"
-import { validateEmail } from "../utils"
+import { validateState } from "../validation"
 
 class SignInPage extends React.Component {
   static navigationOptions = {
-    title: "Sign In or Sign Up"
+    title: "Sign In"
   }
 
   state = {
@@ -19,30 +19,25 @@ class SignInPage extends React.Component {
     this.setState({ [field]: text })
   }
 
-  setError = error =>
-    this.setState({
-      error
-    })
-
   handleSignIn = async () => {
     const { email, password } = this.state
 
-    if (!email) return this.setError("email is required")
-    if (!password) return this.setError("password is required")
-    if (!validateEmail(email)) return this.setError("email is not valid")
-    if (password.length < 8)
-      return this.setError("password must be 8 characters or longer")
+    const stateError = validateState(this.state)
 
-    const error = await authStore.signIn(email, password)
+    if (stateError) return this.setState({ error: stateError })
 
-    if (error) return this.setError(error)
+    const firebaseError = await authStore.signIn(email, password)
+
+    if (firebaseError) return this.setState({ error: firebaseError })
   }
 
   render() {
+    const success = this.props.navigation.getParam("success", null)
     return (
       <Layout
         navigationOptions={SignInPage.navigationOptions}
         error={this.state.error}
+        success={success}
       >
         <TextInput
           value={this.state.email}
@@ -61,6 +56,10 @@ class SignInPage extends React.Component {
         <Button
           title="Go to Create Account"
           onPress={() => this.props.navigation.navigate("CreateAccountPage")}
+        />
+        <Button
+          title="Forgot Password?"
+          onPress={() => this.props.navigation.navigate("ForgotPasswordPage")}
         />
       </Layout>
     )

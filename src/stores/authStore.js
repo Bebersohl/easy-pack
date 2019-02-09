@@ -1,10 +1,64 @@
 import { store } from "react-easy-state"
-import { auth } from "../firebase"
+import { auth, EmailAuthProvider } from "../firebase"
 import uiStore from "../stores/uiStore"
 import navigatorService from "../navigatorService"
 
 const authStore = store({
   firebaseUser: null,
+  deleteAccount: async password => {
+    try {
+      uiStore.loadingOverlayText = "Deleting Account..."
+
+      const credentials = EmailAuthProvider.credential(
+        authStore.firebaseUser.email,
+        password
+      )
+
+      await authStore.firebaseUser.reauthenticateAndRetrieveDataWithCredential(
+        credentials
+      )
+
+      await authStore.firebaseUser.delete()
+
+      navigatorService.navigate("SignInPage", {
+        success: "Account deleted successfully"
+      })
+    } catch (err) {
+      return err.message
+    } finally {
+      uiStore.loadingOverlayText = ""
+    }
+  },
+
+  updateProfile: async displayName => {
+    try {
+      uiStore.loadingOverlayText = "Updating Profile..."
+
+      await authStore.firebaseUser.updateProfile({ displayName })
+
+      navigatorService.navigate("ProfilePage")
+    } catch (err) {
+      return err.message
+    } finally {
+      uiStore.loadingOverlayText = ""
+    }
+  },
+
+  sendPasswordReset: async email => {
+    try {
+      uiStore.loadingOverlayText = "Sending Password Reset..."
+
+      await auth.sendPasswordResetEmail(email)
+
+      navigatorService.navigate("SignInPage", {
+        success: "Password reset email sent"
+      })
+    } catch (err) {
+      return err.message
+    } finally {
+      uiStore.loadingOverlayText = ""
+    }
+  },
 
   createAccount: async (email, password, displayName) => {
     try {

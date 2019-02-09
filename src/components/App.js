@@ -7,8 +7,6 @@ import navigatorService from "../navigatorService"
 
 class App extends React.Component {
   componentDidMount() {
-    // move this to authStore
-    // auth.getRedirectResult().then(authStore.handleGetRedirectResult);
     auth.onAuthStateChanged(authStore.handleAuthStateChanged)
   }
 

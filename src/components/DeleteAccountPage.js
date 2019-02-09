@@ -1,37 +1,31 @@
 import React from "react"
-import { Button, StyleSheet, View, TextInput } from "react-native"
+import { Button, StyleSheet, TextInput } from "react-native"
 import Layout from "./Layout"
 import authStore from "../stores/authStore"
 import { validateState } from "../validation"
 
-class CreateAccountPage extends React.Component {
+class DeleteAccountPage extends React.Component {
   static navigationOptions = {
-    title: "Create Account"
+    title: "Delete Account"
   }
   state = {
     error: "",
-    email: "",
     password: "",
-    confirmPassword: "",
-    displayName: ""
+    confirmPassword: ""
   }
 
   handleChangeText = (field, text) => {
     this.setState({ [field]: text })
   }
 
-  handleCreateAccount = async () => {
-    const { email, password, displayName } = this.state
+  handleDeleteAccount = async () => {
+    const { password } = this.state
 
     const stateError = validateState(this.state)
 
     if (stateError) return this.setState({ error: stateError })
 
-    const firebaseError = await authStore.createAccount(
-      email,
-      password,
-      displayName
-    )
+    const firebaseError = await authStore.deleteAccount(password)
 
     if (firebaseError) return this.setState({ error: firebaseError })
   }
@@ -39,15 +33,9 @@ class CreateAccountPage extends React.Component {
   render() {
     return (
       <Layout
-        navigationOptions={CreateAccountPage.navigationOptions}
+        navigationOptions={DeleteAccountPage.navigationOptions}
         error={this.state.error}
       >
-        <TextInput
-          value={this.state.email}
-          placeholder="email"
-          onChangeText={text => this.handleChangeText("email", text)}
-          textContentType="emailAddress"
-        />
         <TextInput
           value={this.state.password}
           placeholder="password"
@@ -62,16 +50,7 @@ class CreateAccountPage extends React.Component {
           textContentType="password"
           secureTextEntry={true}
         />
-        <TextInput
-          value={this.state.displayName}
-          placeholder="displayName"
-          onChangeText={text => this.handleChangeText("displayName", text)}
-        />
-        <Button title="Create Account" onPress={this.handleCreateAccount} />
-        <Button
-          title="Go to Sign In"
-          onPress={() => this.props.navigation.navigate("SignInPage")}
-        />
+        <Button title="Delete Account" onPress={this.handleDeleteAccount} />
       </Layout>
     )
   }
@@ -79,4 +58,4 @@ class CreateAccountPage extends React.Component {
 
 const styles = StyleSheet.create({})
 
-export default CreateAccountPage
+export default DeleteAccountPage
