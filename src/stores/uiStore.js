@@ -1,7 +1,7 @@
-import { store } from "react-easy-state";
+import { store } from "react-easy-state"
 
 const uiStore = store({
   loadingOverlayText: "Initializing..."
-});
+})
 
-export default uiStore;
+export default uiStore

@@ -3,6 +3,7 @@ import Navigator from "../navigator"
 import { auth } from "../firebase"
 import { view } from "react-easy-state"
 import authStore from "../stores/authStore"
+import navigatorService from "../navigatorService.native"
 
 class App extends React.Component {
   componentDidMount() {
@@ -12,7 +13,13 @@ class App extends React.Component {
   }
 
   render() {
-    return <Navigator />
+    return (
+      <Navigator
+        ref={navigatorRef => {
+          navigatorService.setTopLevelNavigator(navigatorRef)
+        }}
+      />
+    )
   }
 }
 

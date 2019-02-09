@@ -1,18 +1,19 @@
 import React from "react"
-import { Button, StyleSheet, TextInput } from "react-native"
+import { Button, StyleSheet, View, TextInput } from "react-native"
 import Layout from "./Layout"
 import authStore from "../stores/authStore"
 import { validateEmail } from "../utils"
 
-class SignInPage extends React.Component {
+class CreateAccountPage extends React.Component {
   static navigationOptions = {
-    title: "Sign In or Sign Up"
+    title: "Create Account"
   }
-
   state = {
     error: "",
     email: "",
-    password: ""
+    password: "",
+    confirmPassword: "",
+    displayName: ""
   }
 
   handleChangeText = (field, text) => {
@@ -24,16 +25,20 @@ class SignInPage extends React.Component {
       error
     })
 
-  handleSignIn = async () => {
-    const { email, password } = this.state
+  handleCreateAccount = async () => {
+    const { email, password, confirmPassword, displayName } = this.state
 
     if (!email) return this.setError("email is required")
     if (!password) return this.setError("password is required")
     if (!validateEmail(email)) return this.setError("email is not valid")
+    if (!confirmPassword) return this.setError("confirm password is required")
+    if (!displayName) return this.setError("display name is required")
     if (password.length < 8)
       return this.setError("password must be 8 characters or longer")
+    if (password !== confirmPassword)
+      return this.setError("passwords must match")
 
-    const error = await authStore.signIn(email, password)
+    const error = await authStore.createAccount(email, password)
 
     if (error) return this.setError(error)
   }
@@ -41,7 +46,7 @@ class SignInPage extends React.Component {
   render() {
     return (
       <Layout
-        navigationOptions={SignInPage.navigationOptions}
+        navigationOptions={CreateAccountPage.navigationOptions}
         error={this.state.error}
       >
         <TextInput
@@ -57,20 +62,24 @@ class SignInPage extends React.Component {
           textContentType="password"
           secureTextEntry={true}
         />
-        <Button title="Sign In" onPress={this.handleSignIn} />
-        <Button
-          title="Go to Create Account"
-          onPress={() => this.props.navigation.navigate("CreateAccountPage")}
+        <TextInput
+          value={this.state.confirmPassword}
+          placeholder="confirmPassword"
+          onChangeText={text => this.handleChangeText("confirmPassword", text)}
+          textContentType="password"
+          secureTextEntry={true}
         />
+        <TextInput
+          value={this.state.displayName}
+          placeholder="displayName"
+          onChangeText={text => this.handleChangeText("displayName", text)}
+        />
+        <Button title="Create Account" onPress={this.handleCreateAccount} />
       </Layout>
     )
   }
 }
 
-const styles = StyleSheet.create({
-  buttonWrapper: {
-    marginBottom: 15
-  }
-})
+const styles = StyleSheet.create({})
 
-export default SignInPage
+export default CreateAccountPage
