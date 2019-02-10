@@ -4,6 +4,7 @@ import { view } from "react-easy-state"
 import authStore from "../stores/authStore"
 import Layout from "../components/Layout"
 import navigatorService from "../navigatorService"
+import PieChartExample from "./PieChart"
 
 class HomePage extends React.Component {
   static navigationOptions = {
@@ -21,6 +22,7 @@ class HomePage extends React.Component {
     return (
       <Layout navigationOptions={HomePage.navigationOptions}>
         <Text>HomePage</Text>
+        <PieChartExample />
         <Text>{authStore.firebaseUser ? "logged in" : "logged out"}</Text>
       </Layout>
     )
