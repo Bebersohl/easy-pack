@@ -6,6 +6,7 @@ import {
   routeConfigAuth
 } from "./navigator-config"
 import { view } from "react-easy-state"
+import AuthLoadingPage from "./components/AuthLoadingPage"
 
 const AppStack = createSwitchNavigator(routeConfigApp)
 const AuthStack = createSwitchNavigator(routeConfigAuth)
@@ -13,11 +14,10 @@ const AuthStack = createSwitchNavigator(routeConfigAuth)
 export default createBrowserApp(
   createSwitchNavigator(
     {
+      AuthLoading: AuthLoadingPage,
       App: AppStack,
       Auth: AuthStack
     },
-    {
-      // initialRouteName: 'AuthLoading',
-    }
+    stackConfig
   )
 )

@@ -8,6 +8,7 @@ import {
   routeConfigAuth,
   routeConfigApp
 } from "./navigator-config"
+import AuthLoadingPage from "./components/AuthLoadingPage"
 
 const AppStack = createStackNavigator(routeConfigApp)
 const AuthStack = createStackNavigator(routeConfigAuth)
@@ -15,11 +16,10 @@ const AuthStack = createStackNavigator(routeConfigAuth)
 export default createAppContainer(
   createSwitchNavigator(
     {
+      AuthLoading: AuthLoadingPage,
       App: AppStack,
       Auth: AuthStack
     },
-    {
-      // initialRouteName: 'AuthLoading',
-    }
+    stackConfig
   )
 )

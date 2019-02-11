@@ -5,6 +5,7 @@ import ForgotPasswordPage from "./components/ForgotPasswordPage"
 import ProfilePage from "./components/ProfilePage"
 import DeleteAccountPage from "./components/DeleteAccountPage"
 import UpdateProfilePage from "./components/UpdateProfilePage"
+import GearListPage from "./components/GearListPage"
 
 export const routeConfigAuth = {
   SignInPage: { screen: SignInPage, path: "sign-in" },
@@ -16,9 +17,10 @@ export const routeConfigApp = {
   HomePage: { screen: HomePage },
   ProfilePage: { screen: ProfilePage, path: "profile" },
   UpdateProfilePage: { screen: UpdateProfilePage, path: "update-profile" },
-  DeleteAccountPage: { screen: DeleteAccountPage, path: "delete-account" }
+  DeleteAccountPage: { screen: DeleteAccountPage, path: "delete-account" },
+  GearListPage: { screen: GearListPage, path: "gear-list-page:id" }
 }
 
 export const stackConfig = {
-  initialRouteName: "SignInPage"
+  initialRouteName: "AuthLoading"
 }

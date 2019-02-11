@@ -1,7 +1,8 @@
 import { store } from "react-easy-state"
-import { auth, EmailAuthProvider } from "../firebase"
-import uiStore from "../stores/uiStore"
+import { auth, EmailAuthProvider, db } from "../firebase"
+import uiStore from "./uiStore"
 import navigatorService from "../navigatorService"
+import userStore from "./userStore"
 
 const authStore = store({
   firebaseUser: null,
@@ -80,13 +81,14 @@ const authStore = store({
     try {
       uiStore.loadingOverlayText = "Signing in..."
 
-      await auth.signInWithEmailAndPassword(email, password)
+      const res = await auth.signInWithEmailAndPassword(email, password)
 
-      navigatorService.navigate("HomePage")
+      authStore.firebaseUser = res.user.uid
     } catch (err) {
-      return err.message
-    } finally {
+      console.log(err)
       uiStore.loadingOverlayText = ""
+      navigatorService.navigate("SignInPage")
+      return err.message
     }
   },
 
@@ -94,6 +96,7 @@ const authStore = store({
     try {
       uiStore.loadingOverlayText = "Signing out..."
       authStore.firebaseUser = null
+      userStore.user = null
       await auth.signOut()
     } catch (err) {
       return err.message
@@ -102,17 +105,23 @@ const authStore = store({
     }
   },
 
-  handleAuthStateChanged: firebaseUser => {
+  handleAuthStateChanged: async firebaseUser => {
     console.log("handleAuthStateChanged", firebaseUser)
+    try {
+      authStore.firebaseUser = firebaseUser
 
-    authStore.firebaseUser = firebaseUser
+      if (firebaseUser) {
+        await userStore.fetchUser(firebaseUser.uid)
 
-    uiStore.loadingOverlayText = ""
-
-    if (firebaseUser) {
-      navigatorService.navigate("HomePage")
-    } else {
-      navigatorService.navigate("SignInPage")
+        navigatorService.navigate("HomePage")
+      } else {
+        navigatorService.navigate("SignInPage")
+      }
+    } catch (err) {
+      console.log(err)
+      return err
+    } finally {
+      uiStore.loadingOverlayText = ""
     }
   }
 })

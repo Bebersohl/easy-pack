@@ -3,7 +3,7 @@ import uiStore from "../stores/uiStore"
 import LoadingOverlay from "../components/LoadingOverlay"
 import { View, Platform } from "react-native"
 import { view } from "react-easy-state"
-import WebHeader from "./WebHeader"
+import WebHeader from "./WebHeader.web"
 import ErrorMessage from "./ErrorMessage"
 import SuccessMessage from "./SuccessMessage"
 

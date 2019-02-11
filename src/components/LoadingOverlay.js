@@ -1,7 +1,7 @@
-import React from "react";
-import { View, Text, ActivityIndicator, StyleSheet } from "react-native";
-import { view } from "react-easy-state";
-import uiStore from "../stores/uiStore";
+import React from "react"
+import { View, Text, ActivityIndicator, StyleSheet } from "react-native"
+import { view } from "react-easy-state"
+import uiStore from "../stores/uiStore"
 
 class LoadingOverlay extends React.Component {
   render() {
@@ -11,15 +11,14 @@ class LoadingOverlay extends React.Component {
           style={{
             backgroundColor: "white",
             padding: 15,
-            borderRadius: 4,
-            opacity: 1
+            borderRadius: 4
           }}
         >
           <ActivityIndicator />
           <Text>{uiStore.loadingOverlayText}</Text>
         </View>
       </View>
-    );
+    )
   }
 }
 
@@ -36,6 +35,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   }
-});
+})
 
-export default view(LoadingOverlay);
+export default view(LoadingOverlay)

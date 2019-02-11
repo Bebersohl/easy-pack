@@ -1,10 +1,10 @@
 import React from "react"
-import { Text, Button } from "react-native"
+import { Text, Button, View } from "react-native"
 import { view } from "react-easy-state"
 import authStore from "../stores/authStore"
 import Layout from "../components/Layout"
 import navigatorService from "../navigatorService"
-import Pie from "./Pie"
+import userStore from "../stores/userStore"
 
 class HomePage extends React.Component {
   static navigationOptions = {
@@ -18,12 +18,18 @@ class HomePage extends React.Component {
   }
 
   render() {
-    console.log("authStore.firebaseUser", authStore.firebaseUser)
+    if (!userStore.user) {
+      return <View />
+    }
+
     return (
       <Layout navigationOptions={HomePage.navigationOptions}>
-        <Text>HomePage</Text>
-        <Pie />
-        <Text>{authStore.firebaseUser ? "logged in" : "logged out"}</Text>
+        <Text>Your Lists</Text>
+        {userStore.user.lists.length === 0 && (
+          <View onPress={() => {}}>
+            <Text>You don't have any lists. Click here to create one.</Text>
+          </View>
+        )}
       </Layout>
     )
   }

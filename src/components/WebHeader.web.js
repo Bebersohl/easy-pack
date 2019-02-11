@@ -36,7 +36,12 @@ class WebHeader extends React.Component {
     if (!backRoute) return
 
     return (
-      <Text onPress={() => navigatorService.navigate(backRoute)}>Back</Text>
+      <Text
+        style={{ textAlign: "left" }}
+        onPress={() => navigatorService.navigate(backRoute)}
+      >
+        Back
+      </Text>
     )
   }
 
@@ -50,7 +55,10 @@ class WebHeader extends React.Component {
     if (!rightNav) return
 
     return (
-      <Text onPress={() => navigatorService.navigate(rightNav.route)}>
+      <Text
+        style={{ textAlign: "right" }}
+        onPress={() => navigatorService.navigate(rightNav.route)}
+      >
         {rightNav.title}
       </Text>
     )
@@ -59,13 +67,13 @@ class WebHeader extends React.Component {
   render() {
     return (
       <View style={styles.header}>
-        <View style={{ flexGrow: 1, flexBasis: "25%", textAlign: "left" }}>
+        <View style={{ flexGrow: 1, flexBasis: "25%" }}>
           {this.renderBack()}
         </View>
         <Text style={{ flexGrow: 1, flexBasis: "50%", textAlign: "center" }}>
           {get(this.props.navigationOptions, "title", "Easy-Pack")}
         </Text>
-        <View style={{ flexGrow: 1, flexBasis: "25%", textAlign: "right" }}>
+        <View style={{ flexGrow: 1, flexBasis: "25%" }}>
           {this.renderRightNav()}
         </View>
       </View>
