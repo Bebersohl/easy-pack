@@ -70,6 +70,10 @@ const authStore = store({
       if (!res.user) return
 
       await res.user.updateProfile({ displayName })
+
+      await userStore.createUser(res.user.uid)
+
+      navigatorService.navigate("HomePage")
     } catch (err) {
       return err.message
     } finally {
@@ -84,11 +88,15 @@ const authStore = store({
       const res = await auth.signInWithEmailAndPassword(email, password)
 
       authStore.firebaseUser = res.user.uid
+
+      navigatorService.navigate("HomePage")
     } catch (err) {
       console.log(err)
       uiStore.loadingOverlayText = ""
       navigatorService.navigate("SignInPage")
       return err.message
+    } finally {
+      uiStore.loadingOverlayText = ""
     }
   },
 
@@ -111,8 +119,11 @@ const authStore = store({
       authStore.firebaseUser = firebaseUser
 
       if (firebaseUser) {
-        await userStore.fetchUser(firebaseUser.uid)
+        const user = await userStore.fetchUser(firebaseUser.uid)
 
+        if (!user) {
+          await userStore.createUser(firebaseUser.uid)
+        }
         navigatorService.navigate("HomePage")
       } else {
         navigatorService.navigate("SignInPage")

@@ -1,8 +1,10 @@
 import React from "react"
-import { Button, StyleSheet, TextInput } from "react-native"
+import { StyleSheet } from "react-native"
 import Layout from "./Layout"
 import authStore from "../stores/authStore"
 import { validateState } from "../validation"
+import StyledInput from "./StyledInput"
+import StyledButton from "./StyledButton"
 
 class ForgotPasswordPage extends React.Component {
   static navigationOptions = {
@@ -35,13 +37,13 @@ class ForgotPasswordPage extends React.Component {
         navigationOptions={ForgotPasswordPage.navigationOptions}
         error={this.state.error}
       >
-        <TextInput
+        <StyledInput
           value={this.state.email}
           placeholder="email"
           onChangeText={text => this.handleChangeText("email", text)}
           textContentType="emailAddress"
         />
-        <Button
+        <StyledButton
           title="Send Password Reset"
           onPress={this.handlePasswordReset}
         />

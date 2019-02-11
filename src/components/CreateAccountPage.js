@@ -1,8 +1,10 @@
 import React from "react"
-import { Button, StyleSheet, View, TextInput } from "react-native"
+import { StyleSheet, View } from "react-native"
 import Layout from "./Layout"
 import authStore from "../stores/authStore"
 import { validateState } from "../validation"
+import StyledInput from "./StyledInput"
+import StyledButton from "./StyledButton"
 
 class CreateAccountPage extends React.Component {
   static navigationOptions = {
@@ -42,32 +44,35 @@ class CreateAccountPage extends React.Component {
         navigationOptions={CreateAccountPage.navigationOptions}
         error={this.state.error}
       >
-        <TextInput
+        <StyledInput
           value={this.state.email}
           placeholder="email"
           onChangeText={text => this.handleChangeText("email", text)}
           textContentType="emailAddress"
         />
-        <TextInput
+        <StyledInput
           value={this.state.password}
           placeholder="password"
           onChangeText={text => this.handleChangeText("password", text)}
           textContentType="password"
           secureTextEntry={true}
         />
-        <TextInput
+        <StyledInput
           value={this.state.confirmPassword}
           placeholder="confirmPassword"
           onChangeText={text => this.handleChangeText("confirmPassword", text)}
           textContentType="password"
           secureTextEntry={true}
         />
-        <TextInput
+        <StyledInput
           value={this.state.displayName}
           placeholder="displayName"
           onChangeText={text => this.handleChangeText("displayName", text)}
         />
-        <Button title="Create Account" onPress={this.handleCreateAccount} />
+        <StyledButton
+          title="Create Account"
+          onPress={this.handleCreateAccount}
+        />
       </Layout>
     )
   }

@@ -1,8 +1,10 @@
 import React from "react"
-import { Button, StyleSheet, TextInput } from "react-native"
+import { StyleSheet } from "react-native"
 import Layout from "./Layout"
 import authStore from "../stores/authStore"
 import { validateState } from "../validation"
+import StyledInput from "./StyledInput"
+import StyledButton from "./StyledButton"
 
 class DeleteAccountPage extends React.Component {
   static navigationOptions = {
@@ -36,21 +38,24 @@ class DeleteAccountPage extends React.Component {
         navigationOptions={DeleteAccountPage.navigationOptions}
         error={this.state.error}
       >
-        <TextInput
+        <StyledInput
           value={this.state.password}
           placeholder="password"
           onChangeText={text => this.handleChangeText("password", text)}
           textContentType="password"
           secureTextEntry={true}
         />
-        <TextInput
+        <StyledInput
           value={this.state.confirmPassword}
           placeholder="confirmPassword"
           onChangeText={text => this.handleChangeText("confirmPassword", text)}
           textContentType="password"
           secureTextEntry={true}
         />
-        <Button title="Delete Account" onPress={this.handleDeleteAccount} />
+        <StyledButton
+          title="Delete Account"
+          onPress={this.handleDeleteAccount}
+        />
       </Layout>
     )
   }

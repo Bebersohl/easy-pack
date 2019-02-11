@@ -1,7 +1,7 @@
 import React from "react"
 import { View, Text, StyleSheet } from "react-native"
 import { view } from "react-easy-state"
-import get from "lodash.get"
+import _ from "lodash"
 import navigatorService from "../navigatorService"
 
 class WebHeader extends React.Component {
@@ -20,6 +20,7 @@ class WebHeader extends React.Component {
       case "ForgotPasswordPage":
         return "SignInPage"
       case "ProfilePage":
+      case "CreateListPage":
         return "HomePage"
       default:
         return ""
@@ -30,7 +31,7 @@ class WebHeader extends React.Component {
     const currentRoute = navigatorService.getCurrentRoute()
 
     const backRoute = this.getBackRoute(
-      get(currentRoute, "routeName", "HomePage")
+      _.get(currentRoute, "routeName", "HomePage")
     )
 
     if (!backRoute) return
@@ -49,7 +50,7 @@ class WebHeader extends React.Component {
     const currentRoute = navigatorService.getCurrentRoute()
 
     const rightNav = this.getRightNav(
-      get(currentRoute, "routeName", "HomePage")
+      _.get(currentRoute, "routeName", "HomePage")
     )
 
     if (!rightNav) return
@@ -70,8 +71,15 @@ class WebHeader extends React.Component {
         <View style={{ flexGrow: 1, flexBasis: "25%" }}>
           {this.renderBack()}
         </View>
-        <Text style={{ flexGrow: 1, flexBasis: "50%", textAlign: "center" }}>
-          {get(this.props.navigationOptions, "title", "Easy-Pack")}
+        <Text
+          style={{
+            flexGrow: 1,
+            flexBasis: "50%",
+            textAlign: "center",
+            fontWeight: "500"
+          }}
+        >
+          {_.get(this.props.navigationOptions, "title", "Easy-Pack")}
         </Text>
         <View style={{ flexGrow: 1, flexBasis: "25%" }}>
           {this.renderRightNav()}

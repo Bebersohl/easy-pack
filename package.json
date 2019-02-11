@@ -18,7 +18,7 @@
     "@react-navigation/web": "^1.0.0-alpha.7",
     "expo": "^32.0.0",
     "firebase": "^5.8.2",
-    "lodash.get": "^4.4.2",
+    "lodash": "^4.17.11",
     "react": "16.5.0",
     "react-art": "^16.7.0",
     "react-dom": "^16.7.0",
@@ -27,7 +27,6 @@
     "react-native-web": "^0.10.0",
     "react-navigation": "3.0.9",
     "react-scripts": "2.1.3",
-    "svgs": "^4.0.0",
     "victory": "^31.2.0",
     "victory-native": "^31.0.0"
   },

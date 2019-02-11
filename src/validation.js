@@ -19,6 +19,8 @@ export function validateState(state) {
   if (state.hasOwnProperty("displayName") && !state.displayName)
     return "display name is required"
 
+  if (state.hasOwnProperty("name") && !state.name) return "Name is required"
+
   return ""
 }
 

@@ -1,8 +1,10 @@
 import React from "react"
-import { Button, StyleSheet, View, TextInput } from "react-native"
+import { StyleSheet, View } from "react-native"
 import Layout from "./Layout"
 import authStore from "../stores/authStore"
 import { validateState } from "../validation"
+import StyledInput from "./StyledInput"
+import StyledButton from "./StyledButton"
 
 class UpdateAccountPage extends React.Component {
   static navigationOptions = {
@@ -35,12 +37,15 @@ class UpdateAccountPage extends React.Component {
         navigationOptions={UpdateAccountPage.navigationOptions}
         error={this.state.error}
       >
-        <TextInput
+        <StyledInput
           value={this.state.displayName}
           placeholder="New display name"
           onChangeText={text => this.handleChangeText("displayName", text)}
         />
-        <Button title="Update Profile" onPress={this.handleUpdateProfile} />
+        <StyledButton
+          title="Update Profile"
+          onPress={this.handleUpdateProfile}
+        />
       </Layout>
     )
   }

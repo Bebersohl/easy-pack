@@ -1,8 +1,10 @@
 import React from "react"
-import { Button, StyleSheet, TextInput } from "react-native"
+import { StyleSheet } from "react-native"
 import Layout from "./Layout"
 import authStore from "../stores/authStore"
 import { validateState } from "../validation"
+import StyledInput from "./StyledInput"
+import StyledButton from "./StyledButton"
 
 class SignInPage extends React.Component {
   static navigationOptions = {
@@ -39,25 +41,25 @@ class SignInPage extends React.Component {
         error={this.state.error}
         success={success}
       >
-        <TextInput
+        <StyledInput
           value={this.state.email}
           placeholder="email"
           onChangeText={text => this.handleChangeText("email", text)}
           textContentType="emailAddress"
         />
-        <TextInput
+        <StyledInput
           value={this.state.password}
           placeholder="password"
           onChangeText={text => this.handleChangeText("password", text)}
           textContentType="password"
           secureTextEntry={true}
         />
-        <Button title="Sign In" onPress={this.handleSignIn} />
-        <Button
+        <StyledButton title="Sign In" onPress={this.handleSignIn} />
+        <StyledButton
           title="Create Account"
           onPress={() => this.props.navigation.navigate("CreateAccountPage")}
         />
-        <Button
+        <StyledButton
           title="Forgot Password?"
           onPress={() => this.props.navigation.navigate("ForgotPasswordPage")}
         />
