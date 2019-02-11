@@ -78,8 +78,9 @@ const userStore = store({
         description
       })
 
+      console.log("here", [...userStore.user.gearLists, docRef.id])
       await userStore.updateUser({
-        gearLists: [...userStore.gearLists, docRef.id]
+        gearLists: [...userStore.user.gearLists, docRef.id]
       })
 
       navigatorService.navigate("GearListPage", { id: docRef.id })
