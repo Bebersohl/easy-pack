@@ -1,6 +1,7 @@
 import React from "react"
-import { Button, StyleSheet, View } from "react-native"
+import { Button, View } from "react-native"
 import { view } from "react-easy-state"
+import EStyleSheet from "react-native-extended-stylesheet"
 
 const StyledButton = ({ ...props }) => {
   return (
@@ -10,7 +11,7 @@ const StyledButton = ({ ...props }) => {
   )
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   buttonWrapper: {
     marginBottom: 20
   }

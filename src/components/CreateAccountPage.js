@@ -1,10 +1,11 @@
 import React from "react"
-import { StyleSheet, View } from "react-native"
+import { View } from "react-native"
 import Layout from "./Layout"
 import authStore from "../stores/authStore"
 import { validateState } from "../validation"
 import StyledInput from "./StyledInput"
 import StyledButton from "./StyledButton"
+import EStyleSheet from "react-native-extended-stylesheet"
 
 class CreateAccountPage extends React.Component {
   static navigationOptions = {
@@ -78,6 +79,6 @@ class CreateAccountPage extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({})
+const styles = EStyleSheet.create({})
 
 export default CreateAccountPage

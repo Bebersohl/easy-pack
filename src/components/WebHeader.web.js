@@ -1,8 +1,10 @@
 import React from "react"
-import { View, Text, StyleSheet } from "react-native"
+import { View } from "react-native"
 import { view } from "react-easy-state"
 import _ from "lodash"
 import navigatorService from "../navigatorService"
+import EStyleSheet from "react-native-extended-stylesheet"
+import StyledText from "./StyledText"
 
 class WebHeader extends React.Component {
   getRightNav(currentRoute) {
@@ -37,12 +39,12 @@ class WebHeader extends React.Component {
     if (!backRoute) return
 
     return (
-      <Text
+      <StyledText
         style={{ textAlign: "left" }}
         onPress={() => navigatorService.navigate(backRoute)}
       >
         Back
-      </Text>
+      </StyledText>
     )
   }
 
@@ -56,12 +58,12 @@ class WebHeader extends React.Component {
     if (!rightNav) return
 
     return (
-      <Text
+      <StyledText
         style={{ textAlign: "right" }}
         onPress={() => navigatorService.navigate(rightNav.route)}
       >
         {rightNav.title}
-      </Text>
+      </StyledText>
     )
   }
 
@@ -71,7 +73,7 @@ class WebHeader extends React.Component {
         <View style={{ flexGrow: 1, flexBasis: "25%" }}>
           {this.renderBack()}
         </View>
-        <Text
+        <StyledText
           style={{
             flexGrow: 1,
             flexBasis: "50%",
@@ -80,7 +82,7 @@ class WebHeader extends React.Component {
           }}
         >
           {_.get(this.props.navigationOptions, "title", "Easy-Pack")}
-        </Text>
+        </StyledText>
         <View style={{ flexGrow: 1, flexBasis: "25%" }}>
           {this.renderRightNav()}
         </View>
@@ -89,7 +91,7 @@ class WebHeader extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   header: {
     marginTop: -15,
     marginRight: -15,

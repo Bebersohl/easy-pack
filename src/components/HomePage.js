@@ -7,6 +7,7 @@ import navigatorService from "../navigatorService"
 import userStore from "../stores/userStore"
 import LoadingOverlay from "./LoadingOverlay"
 import StyledButton from "./StyledButton"
+import StyledText from "./StyledText"
 
 class HomePage extends React.Component {
   static navigationOptions = {
@@ -26,13 +27,15 @@ class HomePage extends React.Component {
 
     return (
       <Layout navigationOptions={HomePage.navigationOptions}>
-        <Text>Your Lists</Text>
+        <StyledText>Your Lists</StyledText>
         {userStore.user.gearLists.length === 0 && (
           <TouchableOpacity
             onPress={() => navigatorService.navigate("CreateListPage")}
           >
             <View>
-              <Text>You don't have any lists. Click here to create one.</Text>
+              <StyledText>
+                You don't have any lists. Click here to create one.
+              </StyledText>
             </View>
           </TouchableOpacity>
         )}

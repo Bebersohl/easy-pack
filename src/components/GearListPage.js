@@ -1,10 +1,11 @@
 import React from "react"
-import { Text, Button } from "react-native"
+import { Button } from "react-native"
 import { view } from "react-easy-state"
 import authStore from "../stores/authStore"
 import Layout from "../components/Layout"
 import navigatorService from "../navigatorService"
 import MyPie from "./MyPie"
+import StyledText from "./StyledText"
 
 class GearListPage extends React.Component {
   static navigationOptions = {
@@ -14,7 +15,7 @@ class GearListPage extends React.Component {
   render() {
     return (
       <Layout navigationOptions={GearListPage.navigationOptions}>
-        <Text>GearListPage</Text>
+        <StyledText>GearListPage</StyledText>
         <MyPie />
       </Layout>
     )

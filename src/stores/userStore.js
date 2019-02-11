@@ -78,7 +78,6 @@ const userStore = store({
         description
       })
 
-      console.log("here", [...userStore.user.gearLists, docRef.id])
       await userStore.updateUser({
         gearLists: [...userStore.user.gearLists, docRef.id]
       })

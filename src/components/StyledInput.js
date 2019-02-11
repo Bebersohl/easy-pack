@@ -1,6 +1,7 @@
 import React from "react"
-import { TextInput, StyleSheet } from "react-native"
+import { TextInput } from "react-native"
 import { view } from "react-easy-state"
+import EStyleSheet from "react-native-extended-stylesheet"
 
 const StyledInput = ({ ...props }) => {
   return (
@@ -11,7 +12,7 @@ const StyledInput = ({ ...props }) => {
   )
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   input: {
     marginBottom: 20,
     height: 40,

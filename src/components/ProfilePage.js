@@ -1,10 +1,10 @@
 import React from "react"
-import { Text, Button } from "react-native"
 import { view } from "react-easy-state"
 import authStore from "../stores/authStore"
 import Layout from "../components/Layout"
 import _ from "lodash"
 import StyledButton from "./StyledButton"
+import StyledText from "./StyledText"
 
 class ProfilePage extends React.Component {
   static navigationOptions = {
@@ -16,7 +16,7 @@ class ProfilePage extends React.Component {
 
     return (
       <Layout navigationOptions={ProfilePage.navigationOptions}>
-        <Text>Welcome {displayName}!</Text>
+        <StyledText>Welcome {displayName}!</StyledText>
         <StyledButton title="Sign Out" onPress={() => authStore.signOut()} />
         <StyledButton
           title="Reset Password"

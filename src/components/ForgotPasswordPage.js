@@ -1,10 +1,10 @@
 import React from "react"
-import { StyleSheet } from "react-native"
 import Layout from "./Layout"
 import authStore from "../stores/authStore"
 import { validateState } from "../validation"
 import StyledInput from "./StyledInput"
 import StyledButton from "./StyledButton"
+import EStyleSheet from "react-native-extended-stylesheet"
 
 class ForgotPasswordPage extends React.Component {
   static navigationOptions = {
@@ -52,6 +52,6 @@ class ForgotPasswordPage extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({})
+const styles = EStyleSheet.create({})
 
 export default ForgotPasswordPage

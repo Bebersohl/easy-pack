@@ -1,7 +1,9 @@
 import React from "react"
-import { View, Text, ActivityIndicator, StyleSheet } from "react-native"
+import { View, ActivityIndicator } from "react-native"
 import { view } from "react-easy-state"
 import uiStore from "../stores/uiStore"
+import EStyleSheet from "react-native-extended-stylesheet"
+import StyledText from "./StyledText"
 
 class LoadingOverlay extends React.Component {
   render() {
@@ -15,14 +17,14 @@ class LoadingOverlay extends React.Component {
           }}
         >
           <ActivityIndicator />
-          <Text>{uiStore.loadingOverlayText}</Text>
+          <StyledText>{uiStore.loadingOverlayText}</StyledText>
         </View>
       </View>
     )
   }
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   loading: {
     flex: 1,
     position: "absolute",

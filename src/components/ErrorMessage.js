@@ -1,17 +1,19 @@
 import React from "react"
-import { View, Text, StyleSheet } from "react-native"
+import { View } from "react-native"
 import { view } from "react-easy-state"
+import EStyleSheet from "react-native-extended-stylesheet"
+import StyledText from "./StyledText"
 
 class ErrorMessage extends React.Component {
   render() {
     return (
       <View style={styles.loading}>
-        <Text style={{ color: "red" }}>{this.props.message}</Text>
+        <StyledText style={{ color: "red" }}>{this.props.message}</StyledText>
       </View>
     )
   }
 }
 
-const styles = StyleSheet.create({})
+const styles = EStyleSheet.create({})
 
 export default view(ErrorMessage)

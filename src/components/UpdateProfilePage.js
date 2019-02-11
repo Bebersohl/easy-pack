@@ -1,5 +1,5 @@
 import React from "react"
-import { StyleSheet, View } from "react-native"
+import EStyleSheet from "react-native-extended-stylesheet"
 import Layout from "./Layout"
 import authStore from "../stores/authStore"
 import { validateState } from "../validation"
@@ -51,6 +51,6 @@ class UpdateAccountPage extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({})
+const styles = EStyleSheet.create({})
 
 export default UpdateAccountPage
