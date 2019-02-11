@@ -8,33 +8,38 @@ const userStore = store({
   user: null,
 
   createUser: async id => {
+    console.log("createUser")
     try {
-      const newUser = await db
+      const newUser = {
+        id: id,
+        gearLists: []
+      }
+
+      await db
         .collection("users")
         .doc(id)
-        .set({
-          id: id,
-          gearLists: []
-        })
+        .set(newUser)
 
-      userStore.user = newUser
+      return newUser
     } catch (err) {
+      console.log(err)
       return err
     }
   },
 
   fetchUser: async id => {
+    console.log("fetchUser", id)
     try {
       const doc = await db
         .collection("users")
         .doc(id)
         .get()
 
-      if (!doc.exists) return
+      console.log("doc", doc)
+
+      if (!doc.exists) return null
 
       const user = doc.data()
-
-      userStore.user = user
 
       return user
     } catch (err) {
@@ -44,6 +49,7 @@ const userStore = store({
   },
 
   updateUser: async newState => {
+    console.log("updateUser")
     const oldState = _.cloneDeep(userStore.user)
     try {
       await db
@@ -60,6 +66,7 @@ const userStore = store({
   },
 
   createList: async ({ name, description }) => {
+    console.log("createList")
     try {
       uiStore.loadingOverlayText = "Creating List..."
 

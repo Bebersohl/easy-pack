@@ -7,6 +7,7 @@ import userStore from "./userStore"
 const authStore = store({
   firebaseUser: null,
   deleteAccount: async password => {
+    console.log("deleteAccount")
     try {
       uiStore.loadingOverlayText = "Deleting Account..."
 
@@ -32,6 +33,7 @@ const authStore = store({
   },
 
   updateProfile: async displayName => {
+    console.log("updateProfile")
     try {
       uiStore.loadingOverlayText = "Updating Profile..."
 
@@ -46,6 +48,7 @@ const authStore = store({
   },
 
   sendPasswordReset: async email => {
+    console.log("sendPasswordReset")
     try {
       uiStore.loadingOverlayText = "Sending Password Reset..."
 
@@ -62,54 +65,52 @@ const authStore = store({
   },
 
   createAccount: async (email, password, displayName) => {
+    console.log("createAccount")
     try {
       uiStore.loadingOverlayText = "Creating Account..."
 
       const res = await auth.createUserWithEmailAndPassword(email, password)
 
-      if (!res.user) return
+      if (!res.user) throw Error("Account creation failed")
 
       await res.user.updateProfile({ displayName })
-
-      await userStore.createUser(res.user.uid)
-
-      navigatorService.navigate("HomePage")
     } catch (err) {
-      return err.message
-    } finally {
       uiStore.loadingOverlayText = ""
+      navigatorService.navigate("SignInPage")
+      return err.message
     }
   },
 
   signIn: async (email, password) => {
+    console.log("signIn")
     try {
       uiStore.loadingOverlayText = "Signing in..."
 
       const res = await auth.signInWithEmailAndPassword(email, password)
 
+      console.log("signInRes", res)
       authStore.firebaseUser = res.user.uid
-
-      navigatorService.navigate("HomePage")
     } catch (err) {
       console.log(err)
       uiStore.loadingOverlayText = ""
       navigatorService.navigate("SignInPage")
       return err.message
-    } finally {
-      uiStore.loadingOverlayText = ""
     }
   },
 
   signOut: async () => {
+    console.log("signOut")
     try {
       uiStore.loadingOverlayText = "Signing out..."
+
+      await auth.signOut()
+
       authStore.firebaseUser = null
       userStore.user = null
-      await auth.signOut()
     } catch (err) {
-      return err.message
-    } finally {
       uiStore.loadingOverlayText = ""
+      navigatorService.navigate("HomePage")
+      return err.message
     }
   },
 
@@ -118,16 +119,27 @@ const authStore = store({
     try {
       authStore.firebaseUser = firebaseUser
 
-      if (firebaseUser) {
-        const user = await userStore.fetchUser(firebaseUser.uid)
-
-        if (!user) {
-          await userStore.createUser(firebaseUser.uid)
-        }
-        navigatorService.navigate("HomePage")
-      } else {
-        navigatorService.navigate("SignInPage")
+      if (!firebaseUser) {
+        return navigatorService.navigate("SignInPage")
       }
+      console.log("state changed", firebaseUser.uid)
+      const existingUser = await userStore.fetchUser(firebaseUser.uid)
+
+      if (!existingUser) {
+        const newUser = await userStore.createUser(firebaseUser.uid)
+
+        if (!newUser) {
+          console.error("failed to create new user")
+
+          await authStore.signOut()
+        }
+
+        userStore.user = newUser
+      } else {
+        userStore.user = existingUser
+      }
+
+      navigatorService.navigate("HomePage")
     } catch (err) {
       console.log(err)
       return err
