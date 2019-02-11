@@ -19,7 +19,7 @@ export const routeConfigApp = {
   ProfilePage: { screen: ProfilePage, path: "profile" },
   UpdateProfilePage: { screen: UpdateProfilePage, path: "update-profile" },
   DeleteAccountPage: { screen: DeleteAccountPage, path: "delete-account" },
-  GearListPage: { screen: GearListPage, path: "gear-list-page:id" },
+  GearListPage: { screen: GearListPage, path: "gear-list-page/:id" },
   CreateListPage: { screen: CreateListPage, path: "create-list" }
 }
 

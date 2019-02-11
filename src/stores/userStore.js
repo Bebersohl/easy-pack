@@ -3,16 +3,19 @@ import { db } from "../firebase"
 import uiStore from "./uiStore"
 import navigatorService from "../navigatorService"
 import _ from "lodash"
+import shortid from "shortid"
 
 const userStore = store({
   user: null,
+  gearLists: {},
+  isSetupComplete: false,
 
   createUser: async id => {
     console.log("createUser")
     try {
       const newUser = {
         id: id,
-        gearLists: []
+        gearListIds: []
       }
 
       await db
@@ -70,19 +73,29 @@ const userStore = store({
     try {
       uiStore.loadingOverlayText = "Creating List..."
 
-      const docRef = await db.collection("gearLists").add({
+      const id = shortid.generate()
+
+      const newGearList = {
+        id,
         name,
         author: userStore.user.id,
         timestamp: Date.now(),
         data: [],
         description
-      })
+      }
+
+      await db
+        .collection("gearLists")
+        .doc(id)
+        .set(newGearList)
 
       await userStore.updateUser({
-        gearLists: [...userStore.user.gearLists, docRef.id]
+        gearListIds: [...userStore.user.gearListIds, id]
       })
 
-      navigatorService.navigate("GearListPage", { id: docRef.id })
+      userStore.gearLists[id] = newGearList
+
+      navigatorService.navigate("GearListPage", { id })
     } catch (err) {
       console.log(err)
       return err

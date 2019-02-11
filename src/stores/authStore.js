@@ -108,6 +108,7 @@ const authStore = store({
       authStore.firebaseUser = null
       userStore.user = null
     } catch (err) {
+      console.log(err)
       uiStore.loadingOverlayText = ""
       navigatorService.navigate("HomePage")
       return err.message
@@ -138,6 +139,33 @@ const authStore = store({
       } else {
         userStore.user = existingUser
       }
+
+      // fetch gear lists
+      const gearListPromises = userStore.user.gearListIds.map(gearListId =>
+        db
+          .collection("gearLists")
+          .doc(gearListId)
+          .get()
+      )
+
+      const docs = await Promise.all(gearListPromises)
+
+      const gearLists = docs.reduce((acc, doc) => {
+        if (!doc.exists) return
+
+        const gearList = doc.data()
+
+        return {
+          ...acc,
+          [gearList.id]: gearList
+        }
+      }, {})
+
+      console.log("init gear lists", gearLists)
+
+      userStore.gearLists = gearLists
+
+      userStore.isSetupComplete = true
 
       navigatorService.navigate("HomePage")
     } catch (err) {

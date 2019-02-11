@@ -23,6 +23,8 @@ class WebHeader extends React.Component {
         return "SignInPage"
       case "ProfilePage":
       case "CreateListPage":
+      case "GearListPage":
+      case "UpdateProfilePage":
         return "HomePage"
       default:
         return ""

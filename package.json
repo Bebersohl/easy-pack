@@ -28,6 +28,7 @@
     "react-native-web": "^0.10.0",
     "react-navigation": "3.0.9",
     "react-scripts": "2.1.3",
+    "shortid": "^2.2.14",
     "victory": "^31.2.0",
     "victory-native": "^31.0.0"
   },

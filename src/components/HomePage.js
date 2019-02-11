@@ -8,6 +8,7 @@ import userStore from "../stores/userStore"
 import LoadingOverlay from "./LoadingOverlay"
 import StyledButton from "./StyledButton"
 import StyledText from "./StyledText"
+import GearListPreivew from "./GearListPreview"
 
 class HomePage extends React.Component {
   static navigationOptions = {
@@ -21,25 +22,46 @@ class HomePage extends React.Component {
   }
 
   render() {
-    if (!userStore.user) {
+    if (!userStore.isSetupComplete) {
       return <LoadingOverlay />
     }
 
     return (
       <Layout navigationOptions={HomePage.navigationOptions}>
-        <StyledText>Your Lists</StyledText>
-        {userStore.user.gearLists.length === 0 && (
-          <TouchableOpacity
-            onPress={() => navigatorService.navigate("CreateListPage")}
-          >
-            <View>
-              <StyledText>
-                You don't have any lists. Click here to create one.
-              </StyledText>
-            </View>
-          </TouchableOpacity>
-        )}
+        {this.renderLists()}
       </Layout>
+    )
+  }
+
+  renderLists() {
+    if (userStore.user.gearListIds.length === 0) {
+      return (
+        <TouchableOpacity
+          onPress={() => navigatorService.navigate("CreateListPage")}
+        >
+          <View>
+            <StyledText>
+              You don't have any lists. Click here to create one.
+            </StyledText>
+          </View>
+        </TouchableOpacity>
+      )
+    }
+    return (
+      <View>
+        <StyledText>Your Lists</StyledText>
+        {userStore.user.gearListIds.map(gearListId => {
+          console.log("userStore.gearLists", userStore.gearLists)
+          const gearList = userStore.gearLists[gearListId]
+          console.log("HERE", userStore.gearLists)
+          console.log("gearList")
+          return <GearListPreivew key={gearList.id} gearList={gearList} />
+        })}
+        <StyledButton
+          title="Create List"
+          onPress={() => navigatorService.navigate("CreateListPage")}
+        />
+      </View>
     )
   }
 }
