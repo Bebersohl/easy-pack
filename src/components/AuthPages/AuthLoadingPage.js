@@ -1,6 +1,6 @@
 import React from "react"
 import { view } from "react-easy-state"
-import Layout from "../components/Layout"
+import Layout from "../Layout"
 
 class AuthLoadingPage extends React.Component {
   static navigationOptions = {

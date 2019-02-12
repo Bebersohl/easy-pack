@@ -5,6 +5,7 @@ import _ from "lodash"
 import navigatorService from "../navigatorService"
 import EStyleSheet from "react-native-extended-stylesheet"
 import StyledText from "./StyledText"
+import routeStore from "../stores/routeStore"
 
 class WebHeader extends React.Component {
   getRightNav(currentRoute) {
@@ -24,19 +25,17 @@ class WebHeader extends React.Component {
       case "ProfilePage":
       case "CreateListPage":
       case "GearListPage":
-      case "UpdateProfilePage":
         return "HomePage"
+      case "UpdateProfilePage":
+      case "DeleteAccountPage":
+        return "ProfilePage"
       default:
         return ""
     }
   }
 
   renderBack() {
-    const currentRoute = navigatorService.getCurrentRoute()
-
-    const backRoute = this.getBackRoute(
-      _.get(currentRoute, "routeName", "HomePage")
-    )
+    const backRoute = this.getBackRoute(routeStore.currentRoute)
 
     if (!backRoute) return
 
@@ -51,11 +50,7 @@ class WebHeader extends React.Component {
   }
 
   renderRightNav() {
-    const currentRoute = navigatorService.getCurrentRoute()
-
-    const rightNav = this.getRightNav(
-      _.get(currentRoute, "routeName", "HomePage")
-    )
+    const rightNav = this.getRightNav(routeStore.currentRoute)
 
     if (!rightNav) return
 

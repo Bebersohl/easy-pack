@@ -1,10 +1,10 @@
 import React from "react"
-import Layout from "./Layout"
-import authStore from "../stores/authStore"
-import StyledInput from "./StyledInput"
-import { validateState } from "../validation"
-import StyledButton from "./StyledButton"
-import userStore from "../stores/userStore"
+import Layout from "../Layout"
+import authStore from "../../stores/authStore"
+import StyledInput from "../StyledInput"
+import { validateState } from "../../validation"
+import StyledButton from "../StyledButton"
+import userStore from "../../stores/userStore"
 import EStyleSheet from "react-native-extended-stylesheet"
 
 class CreateListPage extends React.Component {

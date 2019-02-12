@@ -151,7 +151,7 @@ const authStore = store({
       const docs = await Promise.all(gearListPromises)
 
       const gearLists = docs.reduce((acc, doc) => {
-        if (!doc.exists) return
+        if (!doc.exists) return acc
 
         const gearList = doc.data()
 
@@ -167,7 +167,7 @@ const authStore = store({
 
       userStore.isSetupComplete = true
 
-      navigatorService.navigate("HomePage")
+      // navigatorService.navigate("HomePage")
     } catch (err) {
       console.log(err)
       return err

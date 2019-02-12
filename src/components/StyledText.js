@@ -18,14 +18,14 @@ const StyledText = ({
     <Text
       style={[
         styles.f5,
+        styles.base,
         f1 && styles.f1,
         f2 && styles.f2,
         f3 && styles.f3,
         f4 && styles.f4,
         f6 && styles.f6,
         muted && styles.muted,
-        italic && styles.italic,
-        styles.base
+        italic && styles.italic
       ]}
       {...props}
     >

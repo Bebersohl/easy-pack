@@ -4,6 +4,7 @@ import { Dimensions } from "react-native"
 import { auth } from "../firebase"
 import { view } from "react-easy-state"
 import authStore from "../stores/authStore"
+import routeStore from "../stores/routeStore"
 import navigatorService from "../navigatorService"
 import EStyleSheet from "react-native-extended-stylesheet"
 
@@ -25,6 +26,7 @@ class App extends React.Component {
     return (
       <Navigator
         ref={navigatorRef => {
+          routeStore.navigatorRef = navigatorRef
           navigatorService.setTopLevelNavigator(navigatorRef)
         }}
       />

@@ -1,9 +1,9 @@
 import React from "react"
-import Layout from "./Layout"
-import authStore from "../stores/authStore"
-import { validateState } from "../validation"
-import StyledInput from "./StyledInput"
-import StyledButton from "./StyledButton"
+import Layout from "../Layout"
+import authStore from "../../stores/authStore"
+import { validateState } from "../../validation"
+import StyledInput from "../StyledInput"
+import StyledButton from "../StyledButton"
 import EStyleSheet from "react-native-extended-stylesheet"
 
 class SignInPage extends React.Component {

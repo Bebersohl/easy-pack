@@ -1,14 +1,14 @@
 import React from "react"
 import { Text, View, TouchableOpacity } from "react-native"
 import { view } from "react-easy-state"
-import authStore from "../stores/authStore"
-import Layout from "../components/Layout"
-import navigatorService from "../navigatorService"
-import userStore from "../stores/userStore"
-import LoadingOverlay from "./LoadingOverlay"
-import StyledButton from "./StyledButton"
-import StyledText from "./StyledText"
-import GearListPreivew from "./GearListPreview"
+import authStore from "../../stores/authStore"
+import Layout from "../Layout"
+import navigatorService from "../../navigatorService"
+import userStore from "../../stores/userStore"
+import LoadingOverlay from "../LoadingOverlay"
+import StyledButton from "../StyledButton"
+import StyledText from "../StyledText"
+import GearListPreivew from "../GearListPreview"
 
 class HomePage extends React.Component {
   static navigationOptions = {
@@ -22,9 +22,7 @@ class HomePage extends React.Component {
   }
 
   render() {
-    if (!userStore.isSetupComplete) {
-      return <LoadingOverlay />
-    }
+    if (!userStore.isSetupComplete) return <LoadingOverlay />
 
     return (
       <Layout navigationOptions={HomePage.navigationOptions}>
@@ -47,6 +45,7 @@ class HomePage extends React.Component {
         </TouchableOpacity>
       )
     }
+
     return (
       <View>
         <StyledText>Your Lists</StyledText>

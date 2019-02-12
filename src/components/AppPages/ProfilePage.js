@@ -1,10 +1,10 @@
 import React from "react"
 import { view } from "react-easy-state"
-import authStore from "../stores/authStore"
-import Layout from "../components/Layout"
+import authStore from "../../stores/authStore"
+import Layout from "../Layout"
 import _ from "lodash"
-import StyledButton from "./StyledButton"
-import StyledText from "./StyledText"
+import StyledButton from "../StyledButton"
+import StyledText from "../StyledText"
 
 class ProfilePage extends React.Component {
   static navigationOptions = {

@@ -8,7 +8,7 @@ import {
   routeConfigAuth,
   routeConfigApp
 } from "./navigator-config"
-import AuthLoadingPage from "./components/AuthLoadingPage"
+import AuthLoadingPage from "./components/AuthPages/AuthLoadingPage"
 
 const AppStack = createStackNavigator(routeConfigApp)
 const AuthStack = createStackNavigator(routeConfigAuth)

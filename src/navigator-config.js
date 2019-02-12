@@ -1,12 +1,12 @@
-import HomePage from "./components/HomePage"
-import SignInPage from "./components/SignInPage"
-import CreateAccountPage from "./components/CreateAccountPage"
-import ForgotPasswordPage from "./components/ForgotPasswordPage"
-import ProfilePage from "./components/ProfilePage"
-import DeleteAccountPage from "./components/DeleteAccountPage"
-import UpdateProfilePage from "./components/UpdateProfilePage"
-import GearListPage from "./components/GearListPage"
-import CreateListPage from "./components/CreateListPage"
+import HomePage from "./components/AppPages/HomePage"
+import SignInPage from "./components/AuthPages/SignInPage"
+import CreateAccountPage from "./components/AuthPages/CreateAccountPage"
+import ForgotPasswordPage from "./components/AuthPages/ForgotPasswordPage"
+import ProfilePage from "./components/AppPages/ProfilePage"
+import DeleteAccountPage from "./components/AppPages/DeleteAccountPage"
+import UpdateProfilePage from "./components/AppPages/UpdateProfilePage"
+import GearListPage from "./components/AppPages/GearListPage"
+import CreateListPage from "./components/AppPages/CreateListPage"
 
 export const routeConfigAuth = {
   SignInPage: { screen: SignInPage, path: "sign-in" },
@@ -15,7 +15,7 @@ export const routeConfigAuth = {
 }
 
 export const routeConfigApp = {
-  HomePage: { screen: HomePage },
+  HomePage: { screen: HomePage, path: "home-page" },
   ProfilePage: { screen: ProfilePage, path: "profile" },
   UpdateProfilePage: { screen: UpdateProfilePage, path: "update-profile" },
   DeleteAccountPage: { screen: DeleteAccountPage, path: "delete-account" },
