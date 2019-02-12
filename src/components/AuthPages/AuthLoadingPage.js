@@ -1,6 +1,7 @@
 import React from "react"
 import { view } from "react-easy-state"
 import Layout from "../Layout"
+import LoadingOverlay from "../LoadingOverlay"
 
 class AuthLoadingPage extends React.Component {
   static navigationOptions = {
@@ -8,7 +9,11 @@ class AuthLoadingPage extends React.Component {
   }
 
   render() {
-    return <Layout navigationOptions={AuthLoadingPage.navigationOptions} />
+    return (
+      <Layout navigationOptions={AuthLoadingPage.navigationOptions}>
+        <LoadingOverlay loadingOverlayText="AUTH LOADING PAGE" />
+      </Layout>
+    )
   }
 }
 

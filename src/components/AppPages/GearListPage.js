@@ -1,7 +1,7 @@
 import React from "react"
 import { Button } from "react-native"
 import { view } from "react-easy-state"
-import authStore from "../../stores/authStore"
+import gearStore from "../../stores/gearStore"
 import Layout from "../Layout"
 import navigatorService from "../../navigatorService"
 import MyPie from "../MyPie"
@@ -14,13 +14,21 @@ class GearListPage extends React.Component {
     title: "List"
   }
 
-  render() {
-    if (!userStore.isSetupComplete) return <LoadingOverlay />
-
+  componentDidMount() {
     const { navigation } = this.props
     const gearListId = navigation.getParam("id", null)
-    console.log(gearListId, userStore.gearLists)
-    const gearList = userStore.gearLists[gearListId]
+
+    gearStore.fetchGearList(gearListId)
+  }
+
+  render() {
+    const { navigation } = this.props
+    const gearListId = navigation.getParam("id", null)
+    console.log(gearListId, gearStore.gearLists)
+    const gearList = gearStore.gearLists[gearListId]
+
+    if (!gearList)
+      return <LoadingOverlay loadingOverlayText="Fetching list..." />
 
     return (
       <Layout navigationOptions={GearListPage.navigationOptions}>

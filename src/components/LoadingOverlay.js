@@ -17,7 +17,9 @@ class LoadingOverlay extends React.Component {
           }}
         >
           <ActivityIndicator />
-          <StyledText>{uiStore.loadingOverlayText}</StyledText>
+          <StyledText>
+            {this.props.loadingOverlayText || uiStore.loadingOverlayText}
+          </StyledText>
         </View>
       </View>
     )
@@ -32,7 +34,7 @@ const styles = EStyleSheet.create({
     right: 0,
     top: 0,
     bottom: 0,
-    opacity: 0.5,
+    opacity: 0.75,
     backgroundColor: "black",
     justifyContent: "center",
     alignItems: "center"

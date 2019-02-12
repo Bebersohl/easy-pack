@@ -7,14 +7,14 @@ import shortid from "shortid"
 
 const userStore = store({
   user: null,
-  gearLists: {},
   isSetupComplete: false,
 
-  createUser: async id => {
+  createUser: async (id, displayName) => {
     console.log("createUser")
     try {
       const newUser = {
-        id: id,
+        id,
+        displayName,
         gearListIds: []
       }
 
@@ -65,42 +65,6 @@ const userStore = store({
       userStore.user = oldState
       console.log(err)
       return err
-    }
-  },
-
-  createList: async ({ name, description }) => {
-    console.log("createList")
-    try {
-      uiStore.loadingOverlayText = "Creating List..."
-
-      const id = shortid.generate()
-
-      const newGearList = {
-        id,
-        name,
-        author: userStore.user.id,
-        timestamp: Date.now(),
-        data: [],
-        description
-      }
-
-      await db
-        .collection("gearLists")
-        .doc(id)
-        .set(newGearList)
-
-      await userStore.updateUser({
-        gearListIds: [...userStore.user.gearListIds, id]
-      })
-
-      userStore.gearLists[id] = newGearList
-
-      navigatorService.navigate("GearListPage", { id })
-    } catch (err) {
-      console.log(err)
-      return err
-    } finally {
-      uiStore.loadingOverlayText = ""
     }
   }
 })

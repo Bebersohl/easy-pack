@@ -1,8 +1,9 @@
 import { store } from "react-easy-state"
-import { auth, EmailAuthProvider, db } from "../firebase"
+import { auth, EmailAuthProvider } from "../firebase"
 import uiStore from "./uiStore"
 import navigatorService from "../navigatorService"
 import userStore from "./userStore"
+import gearStore from "./gearStore"
 
 const authStore = store({
   firebaseUser: null,
@@ -127,7 +128,10 @@ const authStore = store({
       const existingUser = await userStore.fetchUser(firebaseUser.uid)
 
       if (!existingUser) {
-        const newUser = await userStore.createUser(firebaseUser.uid)
+        const newUser = await userStore.createUser(
+          firebaseUser.uid,
+          firebaseUser.displayName
+        )
 
         if (!newUser) {
           console.error("failed to create new user")
@@ -140,34 +144,11 @@ const authStore = store({
         userStore.user = existingUser
       }
 
-      // fetch gear lists
-      const gearListPromises = userStore.user.gearListIds.map(gearListId =>
-        db
-          .collection("gearLists")
-          .doc(gearListId)
-          .get()
-      )
-
-      const docs = await Promise.all(gearListPromises)
-
-      const gearLists = docs.reduce((acc, doc) => {
-        if (!doc.exists) return acc
-
-        const gearList = doc.data()
-
-        return {
-          ...acc,
-          [gearList.id]: gearList
-        }
-      }, {})
-
-      console.log("init gear lists", gearLists)
-
-      userStore.gearLists = gearLists
+      await gearStore.fetchUserGearLists()
 
       userStore.isSetupComplete = true
 
-      // navigatorService.navigate("HomePage")
+      navigatorService.navigate("HomePage")
     } catch (err) {
       console.log(err)
       return err

@@ -1,14 +1,15 @@
 import React from "react"
 import { Text, View, TouchableOpacity } from "react-native"
 import { view } from "react-easy-state"
-import gearStore from "../../stores/gearStore"
-import Layout from "../Layout"
-import navigatorService from "../../navigatorService"
-import userStore from "../../stores/userStore"
-import LoadingOverlay from "../LoadingOverlay"
-import StyledButton from "../StyledButton"
-import StyledText from "../StyledText"
-import GearListPreivew from "../GearListPreview"
+import authStore from "../stores/authStore"
+import Layout from "../components/Layout"
+import navigatorService from "../navigatorService"
+import userStore from "../stores/userStore"
+import LoadingOverlay from "./LoadingOverlay"
+import StyledButton from "./StyledButton"
+import StyledText from "./StyledText"
+import GearListPreivew from "./GearListPreview"
+import gearStore from "../stores/gearStore"
 
 class HomePage extends React.Component {
   static navigationOptions = {
@@ -22,7 +23,9 @@ class HomePage extends React.Component {
   }
 
   render() {
-    if (!userStore.isSetupComplete) return <LoadingOverlay />
+    if (!userStore.isSetupComplete) {
+      return <LoadingOverlay LoadingOverlayText="Hmmm" />
+    }
 
     return (
       <Layout navigationOptions={HomePage.navigationOptions}>
@@ -45,15 +48,12 @@ class HomePage extends React.Component {
         </TouchableOpacity>
       )
     }
-
     return (
       <View>
         <StyledText>Your Lists</StyledText>
         {userStore.user.gearListIds.map(gearListId => {
-          console.log("gearStore.gearLists", gearStore.gearLists)
           const gearList = gearStore.gearLists[gearListId]
-          console.log("HERE", gearStore.gearLists)
-          console.log("gearList")
+
           return <GearListPreivew key={gearList.id} gearList={gearList} />
         })}
         <StyledButton
