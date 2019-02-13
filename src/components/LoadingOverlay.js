@@ -13,7 +13,8 @@ class LoadingOverlay extends React.Component {
           style={{
             backgroundColor: "white",
             padding: 15,
-            borderRadius: 4
+            borderRadius: 4,
+            opacity: 1
           }}
         >
           <ActivityIndicator />

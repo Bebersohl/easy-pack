@@ -11,6 +11,9 @@ function setTopLevelNavigator(navigatorRef) {
 
 function navigate(routeName, params) {
   const dispatchFn = Platform.OS === "web" ? "_dispatch" : "dispatch"
+
+  if (!_navigator) return
+
   _navigator[dispatchFn](
     NavigationActions.navigate({
       routeName,

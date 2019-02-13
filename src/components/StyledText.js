@@ -12,6 +12,7 @@ const StyledText = ({
   f6,
   muted,
   italic,
+  style,
   ...props
 }) => {
   return (
@@ -25,7 +26,8 @@ const StyledText = ({
         f4 && styles.f4,
         f6 && styles.f6,
         muted && styles.muted,
-        italic && styles.italic
+        italic && styles.italic,
+        style && style
       ]}
       {...props}
     >

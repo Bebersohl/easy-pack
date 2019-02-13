@@ -6,12 +6,18 @@ import navigatorService from "../navigatorService"
 import EStyleSheet from "react-native-extended-stylesheet"
 import StyledText from "./StyledText"
 import routeStore from "../stores/routeStore"
+import authStore from "../stores/authStore"
 
 class WebHeader extends React.Component {
   getRightNav(currentRoute) {
     switch (currentRoute) {
-      case "HomePage":
+      case "HomePage": {
+        if (!authStore.firebaseUser) {
+          return { route: "SignInPage", title: "Sign In" }
+        }
+
         return { route: "ProfilePage", title: "Profile" }
+      }
       default:
         return null
     }

@@ -6,6 +6,8 @@ import { validateState } from "../../validation"
 import StyledInput from "../StyledInput"
 import StyledButton from "../StyledButton"
 import EStyleSheet from "react-native-extended-stylesheet"
+import navigatorService from "../../navigatorService"
+import { view } from "react-easy-state"
 
 class CreateAccountPage extends React.Component {
   static navigationOptions = {
@@ -17,6 +19,10 @@ class CreateAccountPage extends React.Component {
     password: "",
     confirmPassword: "",
     displayName: ""
+  }
+
+  componentDidMount() {
+    if (authStore.firebaseUser) navigatorService.navigate("HomePage")
   }
 
   handleChangeText = (field, text) => {
@@ -81,4 +87,4 @@ class CreateAccountPage extends React.Component {
 
 const styles = EStyleSheet.create({})
 
-export default CreateAccountPage
+export default view(CreateAccountPage)

@@ -1,5 +1,5 @@
 import React from "react"
-import { Button } from "react-native"
+import { Button, Switch } from "react-native"
 import { view } from "react-easy-state"
 import gearStore from "../../stores/gearStore"
 import Layout from "../Layout"
@@ -24,11 +24,11 @@ class GearListPage extends React.Component {
   render() {
     const { navigation } = this.props
     const gearListId = navigation.getParam("id", null)
-    console.log(gearListId, gearStore.gearLists)
     const gearList = gearStore.gearLists[gearListId]
 
-    if (!gearList)
+    if (!gearList) {
       return <LoadingOverlay loadingOverlayText="Fetching list..." />
+    }
 
     return (
       <Layout navigationOptions={GearListPage.navigationOptions}>
@@ -36,6 +36,7 @@ class GearListPage extends React.Component {
         <StyledText muted italic f6>
           Last updated {new Date(gearList.timestamp).toLocaleString()}
         </StyledText>
+        <Switch />
         <MyPie />
       </Layout>
     )

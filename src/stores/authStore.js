@@ -104,10 +104,11 @@ const authStore = store({
     try {
       uiStore.loadingOverlayText = "Signing out..."
 
-      await auth.signOut()
-
       authStore.firebaseUser = null
       userStore.user = null
+      userStore.isSetupComplete = false
+
+      await auth.signOut()
     } catch (err) {
       console.log(err)
       uiStore.loadingOverlayText = ""
@@ -122,7 +123,8 @@ const authStore = store({
       authStore.firebaseUser = firebaseUser
 
       if (!firebaseUser) {
-        return navigatorService.navigate("SignInPage")
+        console.log("not firebase user")
+        return navigatorService.navigate("HomePage")
       }
       console.log("state changed", firebaseUser.uid)
       const existingUser = await userStore.fetchUser(firebaseUser.uid)

@@ -5,10 +5,15 @@ import Layout from "../Layout"
 import _ from "lodash"
 import StyledButton from "../StyledButton"
 import StyledText from "../StyledText"
+import navigatorService from "../../navigatorService"
 
 class ProfilePage extends React.Component {
   static navigationOptions = {
     title: "Profile"
+  }
+
+  componentDidMount() {
+    if (!authStore.firebaseUser) navigatorService.navigate("HomePage")
   }
 
   render() {

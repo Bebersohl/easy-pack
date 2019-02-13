@@ -5,6 +5,8 @@ import { validateState } from "../../validation"
 import StyledInput from "../StyledInput"
 import StyledButton from "../StyledButton"
 import EStyleSheet from "react-native-extended-stylesheet"
+import navigatorService from "../../navigatorService"
+import { view } from "react-easy-state"
 
 class ForgotPasswordPage extends React.Component {
   static navigationOptions = {
@@ -13,6 +15,10 @@ class ForgotPasswordPage extends React.Component {
   state = {
     error: "",
     email: ""
+  }
+
+  componentDidMount() {
+    if (!authStore.firebaseUser) navigatorService.navigate("HomePage")
   }
 
   handleChangeText = (field, text) => {
@@ -54,4 +60,4 @@ class ForgotPasswordPage extends React.Component {
 
 const styles = EStyleSheet.create({})
 
-export default ForgotPasswordPage
+export default view(ForgotPasswordPage)

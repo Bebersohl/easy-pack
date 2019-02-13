@@ -6,6 +6,9 @@ import { validateState } from "../../validation"
 import StyledButton from "../StyledButton"
 import userStore from "../../stores/userStore"
 import EStyleSheet from "react-native-extended-stylesheet"
+import navigatorService from "../../navigatorService"
+import { view } from "react-easy-state"
+import gearStore from "../../stores/gearStore"
 
 class CreateListPage extends React.Component {
   static navigationOptions = {
@@ -18,6 +21,10 @@ class CreateListPage extends React.Component {
     description: ""
   }
 
+  componentDidMount() {
+    if (!authStore.firebaseUser) navigatorService.navigate("HomePage")
+  }
+
   handleChangeText = (field, text) => {
     this.setState({ [field]: text })
   }
@@ -27,7 +34,7 @@ class CreateListPage extends React.Component {
 
     if (stateError) return this.setState({ error: stateError })
 
-    await userStore.createList(this.state)
+    await gearStore.createList(this.state)
   }
 
   render() {
@@ -59,4 +66,4 @@ const styles = EStyleSheet.create({
   }
 })
 
-export default CreateListPage
+export default view(CreateListPage)

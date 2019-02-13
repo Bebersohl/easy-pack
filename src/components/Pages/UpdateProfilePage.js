@@ -5,6 +5,8 @@ import authStore from "../../stores/authStore"
 import { validateState } from "../../validation"
 import StyledInput from "../StyledInput"
 import StyledButton from "../StyledButton"
+import navigatorService from "../../navigatorService"
+import { view } from "react-easy-state"
 
 class UpdateAccountPage extends React.Component {
   static navigationOptions = {
@@ -13,6 +15,10 @@ class UpdateAccountPage extends React.Component {
   state = {
     error: "",
     displayName: ""
+  }
+
+  componentDidMount() {
+    if (!authStore.firebaseUser) navigatorService.navigate("HomePage")
   }
 
   handleChangeText = (field, text) => {
@@ -53,4 +59,4 @@ class UpdateAccountPage extends React.Component {
 
 const styles = EStyleSheet.create({})
 
-export default UpdateAccountPage
+export default view(UpdateAccountPage)

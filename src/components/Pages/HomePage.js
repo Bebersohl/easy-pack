@@ -1,15 +1,15 @@
 import React from "react"
-import { Text, View, TouchableOpacity } from "react-native"
+import { View, TouchableOpacity } from "react-native"
 import { view } from "react-easy-state"
-import authStore from "../stores/authStore"
-import Layout from "../components/Layout"
-import navigatorService from "../navigatorService"
-import userStore from "../stores/userStore"
-import LoadingOverlay from "./LoadingOverlay"
-import StyledButton from "./StyledButton"
-import StyledText from "./StyledText"
-import GearListPreivew from "./GearListPreview"
-import gearStore from "../stores/gearStore"
+import gearStore from "../../stores/gearStore"
+import Layout from "../Layout"
+import navigatorService from "../../navigatorService"
+import userStore from "../../stores/userStore"
+import StyledButton from "../StyledButton"
+import StyledText from "../StyledText"
+import GearListPreivew from "../GearListPreview"
+import InfoMessage from "../InfoMessage"
+import authStore from "../../stores/authStore"
 
 class HomePage extends React.Component {
   static navigationOptions = {
@@ -23,31 +23,38 @@ class HomePage extends React.Component {
   }
 
   render() {
-    if (!userStore.isSetupComplete) {
-      return <LoadingOverlay LoadingOverlayText="Hmmm" />
-    }
-
     return (
       <Layout navigationOptions={HomePage.navigationOptions}>
-        {this.renderLists()}
+        {userStore.isSetupComplete
+          ? this.renderAuthorized()
+          : this.renderUnauthorizedView()}
       </Layout>
     )
   }
 
-  renderLists() {
+  renderUnauthorizedView() {
+    return (
+      <StyledText>
+        <InfoMessage
+          message="Sign in to create lists."
+          buttonTitle="Sign In"
+          onPress={() => navigatorService.navigate("SignInPage")}
+        />
+      </StyledText>
+    )
+  }
+
+  renderAuthorized() {
     if (userStore.user.gearListIds.length === 0) {
       return (
-        <TouchableOpacity
+        <InfoMessage
+          message="You don't have any lists yet."
+          buttonTitle="Create List"
           onPress={() => navigatorService.navigate("CreateListPage")}
-        >
-          <View>
-            <StyledText>
-              You don't have any lists. Click here to create one.
-            </StyledText>
-          </View>
-        </TouchableOpacity>
+        />
       )
     }
+
     return (
       <View>
         <StyledText>Your Lists</StyledText>

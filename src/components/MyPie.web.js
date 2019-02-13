@@ -1,8 +1,11 @@
 import React, { Component } from "react"
 import { VictoryPie } from "victory"
+import { view } from "react-easy-state"
 
-export default class PieChart extends Component {
+class PieChart extends Component {
   render() {
     return <VictoryPie />
   }
 }
+
+export default view(PieChart)
