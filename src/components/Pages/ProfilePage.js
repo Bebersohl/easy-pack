@@ -13,7 +13,8 @@ class ProfilePage extends React.Component {
   }
 
   componentDidMount() {
-    if (!authStore.firebaseUser) navigatorService.navigate("HomePage")
+    if (!authStore.firebaseUser)
+      navigatorService.navigate("HomePage", { isAuthorized: false })
   }
 
   render() {

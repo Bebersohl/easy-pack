@@ -20,7 +20,8 @@ class SignInPage extends React.Component {
   }
 
   componentDidMount() {
-    if (authStore.firebaseUser) navigatorService.navigate("HomePage")
+    if (authStore.firebaseUser)
+      navigatorService.navigate("HomePage", { isAuthorized: true })
   }
 
   handleChangeText = (field, text) => {

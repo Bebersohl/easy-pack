@@ -112,7 +112,7 @@ const authStore = store({
     } catch (err) {
       console.log(err)
       uiStore.loadingOverlayText = ""
-      navigatorService.navigate("HomePage")
+      navigatorService.navigate("HomePage", { isAuthorized: true })
       return err.message
     }
   },
@@ -126,7 +126,7 @@ const authStore = store({
         console.log("not firebase user")
         userStore.user = null
         userStore.isSetupComplete = false
-        return navigatorService.navigate("HomePage")
+        return navigatorService.navigate("HomePage", { isAuthorized: false })
       }
       const existingUser = await userStore.fetchUser(firebaseUser.uid)
 
@@ -153,7 +153,7 @@ const authStore = store({
 
       userStore.isSetupComplete = true
 
-      navigatorService.navigate("HomePage")
+      navigatorService.navigate("HomePage", { isAuthorized: true })
     } catch (err) {
       console.log(err)
       return err

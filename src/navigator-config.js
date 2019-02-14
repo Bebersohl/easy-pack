@@ -1,4 +1,3 @@
-import React from "react"
 import HomePage from "./components/Pages/HomePage"
 import SignInPage from "./components/Pages/SignInPage"
 import CreateAccountPage from "./components/Pages/CreateAccountPage"
@@ -9,13 +8,10 @@ import UpdateProfilePage from "./components/Pages/UpdateProfilePage"
 import GearListPage from "./components/Pages/GearListPage"
 import CreateListPage from "./components/Pages/CreateListPage"
 import SearchListsPage from "./components/Pages/SearchListsPage"
-import authStore from "./stores/authStore"
 
 export const routeConfigApp = {
   HomePage: {
-    screen: props => (
-      <HomePage firebaseUser={authStore.firebaseUser} {...props} />
-    ),
+    screen: HomePage,
     path: ""
   },
   SearchListsPage: { screen: SearchListsPage, path: "search-lists" },
@@ -30,5 +26,6 @@ export const routeConfigApp = {
 }
 
 export const stackConfig = {
-  initialRouteName: "HomePage"
+  initialRouteName: "HomePage",
+  initialRouteParams: { isAuthorized: false }
 }

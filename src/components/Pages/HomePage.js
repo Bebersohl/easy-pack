@@ -11,40 +11,28 @@ import GearListPreivew from "../GearListPreview"
 import InfoMessage from "../InfoMessage"
 import authStore from "../../stores/authStore"
 
-import HeaderButtons, {
-  HeaderButton,
-  Item
-} from "react-navigation-header-buttons"
-
-const IoniconsHeaderButton = passMeFurther => (
-  // the `passMeFurther` variable here contains props from <Item .../> as well as <HeaderButtons ... />
-  // and it is important to pass those props to `HeaderButton`
-  // then you may add some information like icon size or color (if you use icons)
-  <HeaderButton {...passMeFurther} color="blue" />
-)
-
 class HomePage extends React.Component {
   static navigationOptions = ({ navigation }) => {
     console.log("navigationOptions", navigation)
     return {
       title: "Home",
       headerRight: (
-        <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
-          <Item
-            title="search"
-            onPress={() => navigatorService.navigate("SearchListsPage")}
-          />
-        </HeaderButtons>
+        <TouchableOpacity
+          onPress={() => navigatorService.navigate("SearchListsPage")}
+        >
+          <StyledText>Search</StyledText>
+        </TouchableOpacity>
       ),
       headerLeft: (
-        <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
-          {!!navigation.getParam("firebaseUser", false) && (
-            <Item
-              title="profile"
+        <>
+          {navigation.getParam("isAuthorized", false) && (
+            <TouchableOpacity
               onPress={() => navigatorService.navigate("ProfilePage")}
-            />
+            >
+              <StyledText>Profile</StyledText>
+            </TouchableOpacity>
           )}
-        </HeaderButtons>
+        </>
       )
     }
   }
@@ -96,10 +84,6 @@ class HomePage extends React.Component {
         <StyledButton
           title="Create List"
           onPress={() => navigatorService.navigate("CreateListPage")}
-        />
-        <StyledButton
-          title="profile"
-          onPress={() => navigatorService.navigate("ProfilePage")}
         />
       </View>
     )

@@ -26,6 +26,7 @@ class GearListPage extends React.Component {
     const gearList = await gearStore.fetchGearList(gearListId)
 
     this.props.navigation.setParams({ title: gearList.name })
+    console.log("didmount", this.props.navigation)
   }
 
   render() {
