@@ -4,6 +4,7 @@ import uiStore from "./uiStore"
 import navigatorService from "../navigatorService"
 import userStore from "./userStore"
 import gearStore from "./gearStore"
+import _ from "lodash"
 
 const authStore = store({
   firebaseUser: null,
@@ -117,12 +118,14 @@ const authStore = store({
   },
 
   handleAuthStateChanged: async firebaseUser => {
-    console.log("handleAuthStateChanged")
+    console.log("handleAuthStateChanged", !!firebaseUser)
     try {
       authStore.firebaseUser = firebaseUser
 
       if (!firebaseUser) {
         console.log("not firebase user")
+        userStore.user = null
+        userStore.isSetupComplete = false
         return navigatorService.navigate("HomePage")
       }
       const existingUser = await userStore.fetchUser(firebaseUser.uid)
@@ -144,7 +147,9 @@ const authStore = store({
         userStore.user = existingUser
       }
 
-      await gearStore.fetchUserGearLists()
+      if (_.isEmpty(gearStore.gearLists)) {
+        await gearStore.fetchUserGearLists()
+      }
 
       userStore.isSetupComplete = true
 

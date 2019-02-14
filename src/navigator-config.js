@@ -1,3 +1,4 @@
+import React from "react"
 import HomePage from "./components/Pages/HomePage"
 import SignInPage from "./components/Pages/SignInPage"
 import CreateAccountPage from "./components/Pages/CreateAccountPage"
@@ -7,12 +8,20 @@ import DeleteAccountPage from "./components/Pages/DeleteAccountPage"
 import UpdateProfilePage from "./components/Pages/UpdateProfilePage"
 import GearListPage from "./components/Pages/GearListPage"
 import CreateListPage from "./components/Pages/CreateListPage"
+import SearchListsPage from "./components/Pages/SearchListsPage"
+import authStore from "./stores/authStore"
 
 export const routeConfigApp = {
+  HomePage: {
+    screen: props => (
+      <HomePage firebaseUser={authStore.firebaseUser} {...props} />
+    ),
+    path: ""
+  },
+  SearchListsPage: { screen: SearchListsPage, path: "search-lists" },
   SignInPage: { screen: SignInPage, path: "sign-in" },
   ForgotPasswordPage: { screen: ForgotPasswordPage, path: "forgot-password" },
   CreateAccountPage: { screen: CreateAccountPage, path: "create-account" },
-  HomePage: { screen: HomePage, path: "" },
   ProfilePage: { screen: ProfilePage, path: "profile" },
   UpdateProfilePage: { screen: UpdateProfilePage, path: "update-profile" },
   DeleteAccountPage: { screen: DeleteAccountPage, path: "delete-account" },

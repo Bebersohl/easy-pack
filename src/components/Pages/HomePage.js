@@ -11,15 +11,42 @@ import GearListPreivew from "../GearListPreview"
 import InfoMessage from "../InfoMessage"
 import authStore from "../../stores/authStore"
 
+import HeaderButtons, {
+  HeaderButton,
+  Item
+} from "react-navigation-header-buttons"
+
+const IoniconsHeaderButton = passMeFurther => (
+  // the `passMeFurther` variable here contains props from <Item .../> as well as <HeaderButtons ... />
+  // and it is important to pass those props to `HeaderButton`
+  // then you may add some information like icon size or color (if you use icons)
+  <HeaderButton {...passMeFurther} color="blue" />
+)
+
 class HomePage extends React.Component {
-  static navigationOptions = {
-    title: "Home",
-    headerRight: (
-      <StyledButton
-        onPress={() => navigatorService.navigate("ProfilePage")}
-        title="Profile"
-      />
-    )
+  static navigationOptions = ({ navigation }) => {
+    console.log("navigationOptions", navigation)
+    return {
+      title: "Home",
+      headerRight: (
+        <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
+          <Item
+            title="search"
+            onPress={() => navigatorService.navigate("SearchListsPage")}
+          />
+        </HeaderButtons>
+      ),
+      headerLeft: (
+        <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
+          {!!navigation.getParam("firebaseUser", false) && (
+            <Item
+              title="profile"
+              onPress={() => navigatorService.navigate("ProfilePage")}
+            />
+          )}
+        </HeaderButtons>
+      )
+    }
   }
 
   render() {
@@ -58,6 +85,9 @@ class HomePage extends React.Component {
     return (
       <View>
         <StyledText>Your Lists</StyledText>
+        <StyledText>
+          Hmm {!!this.props.firebaseUser ? "signed" : "unsigned"}
+        </StyledText>
         {userStore.user.gearListIds.map(gearListId => {
           const gearList = gearStore.gearLists[gearListId]
 
@@ -66,6 +96,10 @@ class HomePage extends React.Component {
         <StyledButton
           title="Create List"
           onPress={() => navigatorService.navigate("CreateListPage")}
+        />
+        <StyledButton
+          title="profile"
+          onPress={() => navigatorService.navigate("ProfilePage")}
         />
       </View>
     )

@@ -29,14 +29,14 @@ class ProfilePage extends React.Component {
             authStore.sendPasswordReset(authStore.firebaseUser.email)
           }
         />
-        <StyledButton
+        {/* <StyledButton
           title="Update Profile"
           onPress={() => this.props.navigation.navigate("UpdateProfilePage")}
         />
         <StyledButton
           title="Delete Account"
           onPress={() => this.props.navigation.navigate("DeleteAccountPage")}
-        />
+        /> */}
       </Layout>
     )
   }
