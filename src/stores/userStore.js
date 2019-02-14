@@ -38,8 +38,6 @@ const userStore = store({
         .doc(id)
         .get()
 
-      console.log("doc", doc)
-
       if (!doc.exists) return null
 
       const user = doc.data()

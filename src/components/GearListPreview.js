@@ -9,7 +9,10 @@ const GearListPreivew = ({ gearList }) => {
   return (
     <TouchableOpacity
       onPress={() =>
-        navigatorService.navigate("GearListPage", { id: gearList.id })
+        navigatorService.navigate("GearListPage", {
+          id: gearList.id,
+          title: gearList.name
+        })
       }
     >
       <View style={styles.preview}>

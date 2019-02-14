@@ -42,8 +42,6 @@ const gearStore = store({
       }
     }, {})
 
-    console.log("init gear lists", gearLists)
-
     gearStore.gearLists = gearLists
   },
 

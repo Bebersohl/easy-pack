@@ -1,5 +1,5 @@
 import React from "react"
-import { View } from "react-native"
+import { View, TouchableOpacity } from "react-native"
 import { view } from "react-easy-state"
 import _ from "lodash"
 import navigatorService from "../navigatorService"
@@ -7,6 +7,7 @@ import EStyleSheet from "react-native-extended-stylesheet"
 import StyledText from "./StyledText"
 import routeStore from "../stores/routeStore"
 import authStore from "../stores/authStore"
+import BackIcon from "./Icons/BackIcon.web"
 
 class WebHeader extends React.Component {
   getRightNav(currentRoute) {
@@ -46,12 +47,9 @@ class WebHeader extends React.Component {
     if (!backRoute) return
 
     return (
-      <StyledText
-        style={{ textAlign: "left" }}
-        onPress={() => navigatorService.navigate(backRoute)}
-      >
-        Back
-      </StyledText>
+      <TouchableOpacity onPress={() => navigatorService.navigate(backRoute)}>
+        <BackIcon />
+      </TouchableOpacity>
     )
   }
 

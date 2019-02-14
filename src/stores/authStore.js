@@ -89,7 +89,6 @@ const authStore = store({
 
       const res = await auth.signInWithEmailAndPassword(email, password)
 
-      console.log("signInRes", res)
       authStore.firebaseUser = res.user.uid
     } catch (err) {
       console.log(err)
@@ -118,7 +117,7 @@ const authStore = store({
   },
 
   handleAuthStateChanged: async firebaseUser => {
-    console.log("handleAuthStateChanged", firebaseUser)
+    console.log("handleAuthStateChanged")
     try {
       authStore.firebaseUser = firebaseUser
 
@@ -126,7 +125,6 @@ const authStore = store({
         console.log("not firebase user")
         return navigatorService.navigate("HomePage")
       }
-      console.log("state changed", firebaseUser.uid)
       const existingUser = await userStore.fetchUser(firebaseUser.uid)
 
       if (!existingUser) {

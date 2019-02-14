@@ -34,13 +34,13 @@ class HomePage extends React.Component {
 
   renderUnauthorizedView() {
     return (
-      <StyledText>
+      <View>
         <InfoMessage
           message="Sign in to create lists."
           buttonTitle="Sign In"
           onPress={() => navigatorService.navigate("SignInPage")}
         />
-      </StyledText>
+      </View>
     )
   }
 
