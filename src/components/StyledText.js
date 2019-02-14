@@ -10,6 +10,7 @@ const StyledText = ({
   f3,
   f4,
   f6,
+  f7,
   muted,
   italic,
   style,
@@ -25,6 +26,7 @@ const StyledText = ({
         f3 && styles.f3,
         f4 && styles.f4,
         f6 && styles.f6,
+        f7 && styles.f7,
         muted && styles.muted,
         italic && styles.italic,
         style && style
@@ -43,6 +45,7 @@ const styles = EStyleSheet.create({
   f4: { fontSize: "1.25rem" },
   f5: { fontSize: "1rem" },
   f6: { fontSize: ".875rem" },
+  f7: { fontSize: ".75rem" },
   muted: { color: "grey" },
   italic: { fontStyle: "italic" },
   base: { color: "#333" }
