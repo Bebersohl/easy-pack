@@ -8,22 +8,10 @@ import StyledText from "./StyledText"
 import routeStore from "../stores/routeStore"
 import authStore from "../stores/authStore"
 import BackIcon from "./Icons/BackIcon.web"
+import ProfileNav from "./ProfileNav"
+import SearchNav from "./SearchNav"
 
 class WebHeader extends React.Component {
-  getRightNav(currentRoute) {
-    switch (currentRoute) {
-      case "HomePage": {
-        if (!authStore.firebaseUser) {
-          return { route: "SignInPage", title: "Sign In" }
-        }
-
-        return { route: "ProfilePage", title: "Profile" }
-      }
-      default:
-        return null
-    }
-  }
-
   getBackRoute(currentRoute) {
     switch (currentRoute) {
       case "CreateAccountPage":
@@ -32,6 +20,8 @@ class WebHeader extends React.Component {
       case "ProfilePage":
       case "CreateListPage":
       case "GearListPage":
+      case "SignInPage":
+      case "SearchListsPage":
         return "HomePage"
       case "UpdateProfilePage":
       case "DeleteAccountPage":
@@ -41,50 +31,51 @@ class WebHeader extends React.Component {
     }
   }
 
-  renderBack() {
+  renderLeftNav() {
+    if (routeStore.currentRoute === "HomePage") {
+      return <ProfileNav />
+    }
     const backRoute = this.getBackRoute(routeStore.currentRoute)
 
     if (!backRoute) return
 
     return (
       <TouchableOpacity onPress={() => navigatorService.navigate(backRoute)}>
-        <BackIcon />
+        <View style={{ marginLeft: 15 }}>
+          <BackIcon />
+        </View>
       </TouchableOpacity>
     )
   }
 
   renderRightNav() {
-    const rightNav = this.getRightNav(routeStore.currentRoute)
+    if (routeStore.currentRoute !== "HomePage") return
 
-    if (!rightNav) return
-
-    return (
-      <StyledText
-        style={{ textAlign: "right" }}
-        onPress={() => navigatorService.navigate(rightNav.route)}
-      >
-        {rightNav.title}
-      </StyledText>
-    )
+    return <SearchNav />
   }
 
   render() {
     return (
       <View style={styles.header}>
-        <View style={{ flexGrow: 1, flexBasis: "25%" }}>
-          {this.renderBack()}
+        <View style={{ flexGrow: 1, flexBasis: "5%" }}>
+          {this.renderLeftNav()}
         </View>
         <StyledText
           style={{
             flexGrow: 1,
             flexBasis: "50%",
-            textAlign: "center",
             fontWeight: "500"
           }}
         >
-          {_.get(this.props.navigationOptions, "title", "Easy-Pack")}
+          {_.get(this.props.navigationOptions, "title", "Home")}
         </StyledText>
-        <View style={{ flexGrow: 1, flexBasis: "25%" }}>
+        <View
+          style={{
+            flexGrow: 1,
+            flexBasis: "25%",
+            flexDirection: "row-reverse"
+          }}
+        >
           {this.renderRightNav()}
         </View>
       </View>
@@ -98,7 +89,8 @@ const styles = EStyleSheet.create({
     marginRight: -15,
     marginLeft: -15,
     marginBottom: 15,
-    padding: 15,
+    paddingTop: 15,
+    paddingBottom: 15,
     backgroundColor: "lightblue",
     justifyContent: "space-between",
     alignItems: "center",

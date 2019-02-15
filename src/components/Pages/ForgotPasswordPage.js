@@ -18,8 +18,7 @@ class ForgotPasswordPage extends React.Component {
   }
 
   componentDidMount() {
-    if (!authStore.firebaseUser)
-      navigatorService.navigate("HomePage", { isAuthorized: false })
+    if (!authStore.firebaseUser) navigatorService.navigate("HomePage")
   }
 
   handleChangeText = (field, text) => {

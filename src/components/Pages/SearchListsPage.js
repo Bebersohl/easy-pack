@@ -12,7 +12,7 @@ import StyledText from "../StyledText"
 
 class SearchListsPage extends React.Component {
   static navigationOptions = {
-    title: "search lists"
+    title: "Search Lists"
   }
 
   render() {

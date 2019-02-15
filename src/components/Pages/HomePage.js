@@ -1,5 +1,5 @@
 import React from "react"
-import { View, TouchableOpacity } from "react-native"
+import { View } from "react-native"
 import { view } from "react-easy-state"
 import gearStore from "../../stores/gearStore"
 import Layout from "../Layout"
@@ -9,38 +9,22 @@ import StyledButton from "../StyledButton"
 import StyledText from "../StyledText"
 import GearListPreivew from "../GearListPreview"
 import InfoMessage from "../InfoMessage"
-import authStore from "../../stores/authStore"
-import BackIcon from "../Icons/BackIcon.web"
+import ProfileNav from "../ProfileNav"
+import SearchNav from "../SearchNav"
+
 class HomePage extends React.Component {
   static navigationOptions = ({ navigation }) => {
     console.log("navigationOptions", navigation)
     return {
       title: "Home",
-      headerRight: (
-        <TouchableOpacity
-          onPress={() => navigatorService.navigate("SearchListsPage")}
-        >
-          <StyledText>Search</StyledText>
-        </TouchableOpacity>
-      ),
-      headerLeft: (
-        <>
-          {navigation.getParam("isAuthorized", false) && (
-            <TouchableOpacity
-              onPress={() => navigatorService.navigate("ProfilePage")}
-            >
-              <StyledText>Profile</StyledText>
-            </TouchableOpacity>
-          )}
-        </>
-      )
+      headerRight: <SearchNav />,
+      headerLeft: <ProfileNav />
     }
   }
 
   render() {
     return (
       <Layout navigationOptions={HomePage.navigationOptions}>
-        <BackIcon style={{ width: 13, height: 13 }} />
         {userStore.isSetupComplete
           ? this.renderAuthorized()
           : this.renderUnauthorizedView()}
