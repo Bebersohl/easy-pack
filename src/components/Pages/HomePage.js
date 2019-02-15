@@ -11,6 +11,7 @@ import GearListPreivew from "../GearListPreview"
 import InfoMessage from "../InfoMessage"
 import ProfileNav from "../ProfileNav"
 import SearchNav from "../SearchNav"
+import LoadingOverlay from "../LoadingOverlay"
 
 class HomePage extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -45,6 +46,7 @@ class HomePage extends React.Component {
   }
 
   renderAuthorized() {
+    // if (gearStore.isSetupComplete) return <LoadingOverlay loadingOverlayText="Fetching lists..."></LoadingOverlay>
     if (userStore.user.gearListIds.length === 0) {
       return (
         <InfoMessage
@@ -58,9 +60,6 @@ class HomePage extends React.Component {
     return (
       <View>
         <StyledText>Your Lists</StyledText>
-        <StyledText>
-          Hmm {!!this.props.firebaseUser ? "signed" : "unsigned"}
-        </StyledText>
         {userStore.user.gearListIds.map(gearListId => {
           const gearList = gearStore.gearLists[gearListId]
 

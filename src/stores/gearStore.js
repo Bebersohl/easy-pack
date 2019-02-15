@@ -12,10 +12,12 @@ const gearStore = store({
       return gearStore.gearLists[id]
     }
 
-    const gearList = await db
+    const doc = await db
       .collection("gearLists")
       .doc(id)
       .get()
+
+    const gearList = doc.data()
 
     gearStore.gearLists[id] = gearList
 

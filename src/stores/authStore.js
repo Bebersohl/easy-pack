@@ -126,7 +126,7 @@ const authStore = store({
         console.log("not firebase user")
         userStore.user = null
         userStore.isSetupComplete = false
-        return navigatorService.navigate("HomePage")
+        // return navigatorService.navigate("HomePage")
       }
       const existingUser = await userStore.fetchUser(firebaseUser.uid)
 
@@ -147,13 +147,14 @@ const authStore = store({
         userStore.user = existingUser
       }
 
+      console.log("hi", _.isEmpty(gearStore.gearLists), gearStore.gearLists)
       if (_.isEmpty(gearStore.gearLists)) {
         await gearStore.fetchUserGearLists()
       }
 
       userStore.isSetupComplete = true
 
-      navigatorService.navigate("HomePage")
+      // navigatorService.navigate("HomePage")
     } catch (err) {
       console.log(err)
       return err
