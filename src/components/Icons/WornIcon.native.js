@@ -17,8 +17,9 @@ import {
   Defs,
   Stop
 } from "react-native-svg"
+import { view } from "react-easy-state"
 
-export default function WornIcon(props) {
+const WornIcon = props => {
   return (
     <Svg
       className="svg-inline--fa fa-tshirt fa-w-20"
@@ -36,3 +37,5 @@ export default function WornIcon(props) {
     </Svg>
   )
 }
+
+export default view(WornIcon)

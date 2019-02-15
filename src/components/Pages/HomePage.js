@@ -10,7 +10,7 @@ import StyledText from "../StyledText"
 import GearListPreivew from "../GearListPreview"
 import InfoMessage from "../InfoMessage"
 import authStore from "../../stores/authStore"
-
+import BackIcon from "../Icons/BackIcon.web"
 class HomePage extends React.Component {
   static navigationOptions = ({ navigation }) => {
     console.log("navigationOptions", navigation)
@@ -40,6 +40,7 @@ class HomePage extends React.Component {
   render() {
     return (
       <Layout navigationOptions={HomePage.navigationOptions}>
+        <BackIcon style={{ width: 13, height: 13 }} />
         {userStore.isSetupComplete
           ? this.renderAuthorized()
           : this.renderUnauthorizedView()}

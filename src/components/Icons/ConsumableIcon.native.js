@@ -17,8 +17,9 @@ import {
   Defs,
   Stop
 } from "react-native-svg"
+import { view } from "react-easy-state"
 
-export default function ConsumableIcon(props) {
+const ConsumableIcon = props => {
   return (
     <Svg
       className="svg-inline--fa fa-utensils fa-w-13"
@@ -36,3 +37,5 @@ export default function ConsumableIcon(props) {
     </Svg>
   )
 }
+
+export default view(ConsumableIcon)

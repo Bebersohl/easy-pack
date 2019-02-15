@@ -1,5 +1,6 @@
 import React from "react"
 import { Image } from "react-native"
+import { view } from "react-easy-state"
 
 const BackIcon = () => {
   return (
@@ -15,4 +16,4 @@ const BackIcon = () => {
   )
 }
 
-export default BackIcon
+export default view(BackIcon)
