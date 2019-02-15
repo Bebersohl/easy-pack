@@ -8,10 +8,11 @@ import StyledButton from "../StyledButton"
 import EStyleSheet from "react-native-extended-stylesheet"
 import navigatorService from "../../navigatorService"
 import { view } from "react-easy-state"
+import PageTitle from "../PageTitle"
 
 class CreateAccountPage extends React.Component {
   static navigationOptions = {
-    title: "Create Account"
+    headerTitle: <PageTitle />
   }
   state = {
     error: "",

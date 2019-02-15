@@ -7,10 +7,11 @@ import StyledInput from "../StyledInput"
 import StyledButton from "../StyledButton"
 import navigatorService from "../../navigatorService"
 import { view } from "react-easy-state"
+import PageTitle from "../PageTitle"
 
 class UpdateAccountPage extends React.Component {
   static navigationOptions = {
-    title: "Update Profile"
+    headerTitle: <PageTitle />
   }
   state = {
     error: "",

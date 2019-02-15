@@ -7,10 +7,11 @@ import StyledButton from "../StyledButton"
 import EStyleSheet from "react-native-extended-stylesheet"
 import navigatorService from "../../navigatorService"
 import { view } from "react-easy-state"
+import PageTitle from "../PageTitle"
 
 class ForgotPasswordPage extends React.Component {
   static navigationOptions = {
-    title: "Forgot Password"
+    headerTitle: <PageTitle />
   }
   state = {
     error: "",

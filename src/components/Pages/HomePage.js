@@ -12,12 +12,12 @@ import InfoMessage from "../InfoMessage"
 import ProfileNav from "../ProfileNav"
 import SearchNav from "../SearchNav"
 import LoadingOverlay from "../LoadingOverlay"
+import PageTitle from "../PageTitle"
 
 class HomePage extends React.Component {
   static navigationOptions = ({ navigation }) => {
-    console.log("navigationOptions", navigation)
     return {
-      title: "Home",
+      headerTitle: <PageTitle />,
       headerRight: <SearchNav />,
       headerLeft: <ProfileNav />
     }

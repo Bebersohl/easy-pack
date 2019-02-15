@@ -9,10 +9,11 @@ import EStyleSheet from "react-native-extended-stylesheet"
 import navigatorService from "../../navigatorService"
 import { view } from "react-easy-state"
 import gearStore from "../../stores/gearStore"
+import PageTitle from "../PageTitle"
 
 class CreateListPage extends React.Component {
   static navigationOptions = {
-    title: "Create List"
+    headerTitle: <PageTitle />
   }
 
   state = {

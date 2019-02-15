@@ -10,6 +10,7 @@ import authStore from "../stores/authStore"
 import BackIcon from "./Icons/BackIcon.web"
 import ProfileNav from "./ProfileNav"
 import SearchNav from "./SearchNav"
+import PageTitle from "./PageTitle"
 
 class WebHeader extends React.Component {
   getBackRoute(currentRoute) {
@@ -57,18 +58,8 @@ class WebHeader extends React.Component {
   render() {
     return (
       <View style={styles.header}>
-        <View style={{ flexGrow: 1, flexBasis: "5%" }}>
-          {this.renderLeftNav()}
-        </View>
-        <StyledText
-          style={{
-            flexGrow: 1,
-            flexBasis: "50%",
-            fontWeight: "500"
-          }}
-        >
-          {_.get(this.props.navigationOptions, "title", "Home")}
-        </StyledText>
+        <View style={{ flexBasis: 50 }}>{this.renderLeftNav()}</View>
+        <PageTitle />
         <View
           style={{
             flexGrow: 1,

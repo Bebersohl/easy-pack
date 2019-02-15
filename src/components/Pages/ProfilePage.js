@@ -6,10 +6,11 @@ import _ from "lodash"
 import StyledButton from "../StyledButton"
 import StyledText from "../StyledText"
 import navigatorService from "../../navigatorService"
+import PageTitle from "../PageTitle"
 
 class ProfilePage extends React.Component {
   static navigationOptions = {
-    title: "Profile"
+    headerTitle: <PageTitle />
   }
 
   componentDidMount() {

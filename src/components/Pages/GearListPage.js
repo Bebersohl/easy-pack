@@ -10,23 +10,22 @@ import userStore from "../../stores/userStore"
 import LoadingOverlay from "../LoadingOverlay"
 import ConsumableIcon from "../Icons/ConsumableIcon"
 import WornIcon from "../Icons/WornIcon"
+import GearListTitle from "../PageTitle"
+import PageTitle from "../PageTitle"
 
 class GearListPage extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      title: navigation.getParam("title", "")
-    }
+  static navigationOptions = {
+    headerTitle: <PageTitle />
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     const { navigation } = this.props
 
     const gearListId = navigation.getParam("id", null)
 
-    const gearList = await gearStore.fetchGearList(gearListId)
+    gearStore.activeGearListId = gearListId
 
-    this.props.navigation.setParams({ title: gearList.name })
-    console.log("didmount", this.props.navigation)
+    gearStore.fetchGearList(gearListId)
   }
 
   render() {

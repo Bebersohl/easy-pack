@@ -7,7 +7,10 @@ import navigatorService from "../navigatorService"
 
 const gearStore = store({
   gearLists: {},
+  activeGearListId: null,
   fetchGearList: async id => {
+    if (!id) return
+
     if (gearStore.gearLists.hasOwnProperty(id)) {
       return gearStore.gearLists[id]
     }

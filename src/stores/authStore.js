@@ -90,7 +90,9 @@ const authStore = store({
 
       const res = await auth.signInWithEmailAndPassword(email, password)
 
-      authStore.firebaseUser = res.user.uid
+      authStore.firebaseUser = res.user
+
+      navigatorService.navigate("HomePage")
     } catch (err) {
       console.log(err)
       uiStore.loadingOverlayText = ""
@@ -109,6 +111,8 @@ const authStore = store({
       userStore.isSetupComplete = false
 
       await auth.signOut()
+
+      navigatorService.navigate("HomePage")
     } catch (err) {
       console.log(err)
       uiStore.loadingOverlayText = ""
@@ -147,14 +151,9 @@ const authStore = store({
         userStore.user = existingUser
       }
 
-      console.log("hi", _.isEmpty(gearStore.gearLists), gearStore.gearLists)
-      if (_.isEmpty(gearStore.gearLists)) {
-        await gearStore.fetchUserGearLists()
-      }
+      await gearStore.fetchUserGearLists()
 
       userStore.isSetupComplete = true
-
-      // navigatorService.navigate("HomePage")
     } catch (err) {
       console.log(err)
       return err

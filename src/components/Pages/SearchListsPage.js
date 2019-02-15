@@ -9,10 +9,11 @@ import EStyleSheet from "react-native-extended-stylesheet"
 import navigatorService from "../../navigatorService"
 import { view } from "react-easy-state"
 import StyledText from "../StyledText"
+import PageTitle from "../PageTitle"
 
 class SearchListsPage extends React.Component {
   static navigationOptions = {
-    title: "Search Lists"
+    headerTitle: <PageTitle />
   }
 
   render() {
