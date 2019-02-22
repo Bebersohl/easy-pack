@@ -1,5 +1,5 @@
 import React from "react"
-import { Button, Switch, View, Image } from "react-native"
+import { Button, Switch, View, Image, TouchableOpacity } from "react-native"
 import { view } from "react-easy-state"
 import gearStore from "../../stores/gearStore"
 import Layout from "../Layout"
@@ -14,6 +14,7 @@ import GearListTitle from "../PageTitle"
 import PageTitle from "../PageTitle"
 import GearTable from "../GearTable"
 import SummaryTable from "../SummaryTable"
+import shortid from "shortid"
 
 class GearListPage extends React.Component {
   static navigationOptions = {
@@ -49,9 +50,24 @@ class GearListPage extends React.Component {
         )}
         <Switch />
 
-        <SummaryTable />
+        <SummaryTable gearList={gearList} />
 
-        <GearTable />
+        {gearList.categories.map(category => (
+          <GearTable key={category.id} category={category} />
+        ))}
+
+        <TouchableOpacity
+          style={{ marginTop: 30 }}
+          onPress={() =>
+            gearList.categories.push({
+              name: "New Category",
+              id: shortid.generate(),
+              items: []
+            })
+          }
+        >
+          <StyledText>Add a new category</StyledText>
+        </TouchableOpacity>
 
         <MyPie />
       </Layout>
