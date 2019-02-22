@@ -45,10 +45,10 @@ const GearTable = ({ category }) => {
         <ConsumableIcon />
       </View>
       <StyledText style={{ flexBasis: 70 }} f7>
-        {item.weight}
+        {item.weight}g
       </StyledText>
       <StyledText style={{ flexBasis: 45 }} f7>
-        {item.price}
+        ${item.price}
       </StyledText>
       <StyledText style={{ flexBasis: 25, textAlign: "right" }} f7>
         {item.qty}
@@ -91,8 +91,8 @@ const GearTable = ({ category }) => {
             id: shortid.generate(),
             weight: 23,
             description: "new item",
-            worn: true,
-            consumable: true,
+            worn: false,
+            consumable: false,
             price: 43,
             qty: 1,
             link: "https://www.google.com"
